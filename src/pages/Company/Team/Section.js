@@ -1,48 +1,33 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import heroimage from "../../../assets/images/hero.png"
 
 const Section = () => {
+  const sectionStyle = {
+    backgroundImage: `url(${heroimage})`,
+    backgroundSize: 'auto',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right bottom',
+    height: '300px', // Set a specific height for the section
+    position: 'relative', // Ensure positioning for the text
+
+  };
+  
+  const TextOverlay = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+  };
   return (
     <React.Fragment>
-      <section className="p-3  bg-green-dark">
-        <Container>
-          <Row className="justify-content-center">
-            <Col md={6}>
-              <div className="text-center text-white">
-                <h3 className="mb-4">Team</h3>
-                <div className="page-next">
-                  <nav
-                    className="d-inline-block"
-                    aria-label="breadcrumb text-center"
-                  >
-                    <ol className="breadcrumb justify-content-center">
-                      <li className="breadcrumb-item">
-                        <Link to="/">Home</Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link to="#">Company</Link>
-                      </li>
-                      <li
-                        className="breadcrumb-item active"
-                        aria-current="page"
-                      >
-                        {" "}
-                        Team{" "}
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
+     <section className="w-100 p-3 bg-primary z-1" style={sectionStyle} >
+      
+              <div className="text-center text-white z-3" style={TextOverlay}>
+                <h1 className="mb-4">Team Code Canva </h1>
               </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-      <div className="position-relative" style={{ zIndex: 1 }}>
-        <div className="shape">
-          
-        </div>
-      </div>
+              </section>
+      
     </React.Fragment>
   );
 };

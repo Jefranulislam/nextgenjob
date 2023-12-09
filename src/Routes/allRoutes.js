@@ -6,10 +6,8 @@ import React from "react";
 
 //Company Section
 import AboutUs from "../pages/Company/AboutUs/AboutUs";
-import Services from "../pages/Company/Services/Services";
 import Team from "../pages/Company/Team/Team";
 import PrivacyAndPolicy from "../pages/Company/PrivacyAndPolicy/PrivacyAndPolicy";
-import Faqs from "../pages/Company/Faqs/Faqs";
 
 //Jobs Section
 // import JobList from "../pages/Jobs/JobList/JobList";
@@ -79,10 +77,8 @@ const userRoutes = [
   { path: "/joblist2", component: <JobList2 /> },
 
   //Company Section
-  { path: "/faqs", component: <Faqs /> },
   { path: "/privacyandpolicy", component: <PrivacyAndPolicy /> },
   { path: "/team", component: <Team /> },
-  { path: "/services", component: <Services /> },
   { path: "/about-us", component: <AboutUs/> },
 
   //Home Section

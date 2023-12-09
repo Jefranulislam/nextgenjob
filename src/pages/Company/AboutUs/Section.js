@@ -1,54 +1,35 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
+import heroimage from "../../../assets/images/hero.png"
+import logo from "../../../assets/images/LOGO.png"
 
 const Section = () => {
+  const sectionStyle = {
+    backgroundImage: `url(${heroimage})`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right bottom',
+    height: '400px', // Set a specific height for the section
+    position: 'relative', // Ensure positioning for the text
+
+  };
+  
+  const TextOverlay = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+  };
   return (
     <React.Fragment>
-      <section className="page-title-box">
-        <Container>
-          <Row className="justify-content-center">
-            <Col md={6}>
-              <div className="text-center text-white">
-                <h3 className="mb-4">About Us</h3>
-                <div className="page-next">
-                  <nav
-                    className="d-inline-block"
-                    aria-label="breadcrumb text-center"
-                  >
-                    <ol className="breadcrumb justify-content-center">
-                      <li className="breadcrumb-item">
-                        <Link to="/">Home</Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link to="#">Company</Link>
-                      </li>
-                      <li
-                        className="breadcrumb-item active"
-                        aria-current="page"
-                      >
-                        {" "}
-                        About Us{" "}
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-      <div className="position-relative">
-        <div className="shape">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
-            <path
-              fill="#FFFFFF"
-              fillOpacity="1"
-              d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
-            ></path>
-          </svg>
-        </div>
+       <section className="w-100 p-3 bg-primary z-1" style={sectionStyle} >
+      <div className="text-center text-white z-3" style={TextOverlay}>
+        <h1 className="mb-4">About </h1>
+        <img className="img-fluid w-25" src={logo }></img>
       </div>
+      </section>
     </React.Fragment>
   );
 };

@@ -4,12 +4,23 @@ import { Col, Container, Row, Form } from "reactstrap";
 import processImage2 from "../../../assets/images/process-02.png";
 import CountryOptions from "../SubSection/CountryOptions";
 import JobSearch from "../SubSection/JobSearch";
-import hero from "../../../assets/images/hero.png";
 import logo from "../../../assets/images/Nextgenjob.png";
+import hero from "../../../assets/images/Herobannarfeatured.png"
 const section = () => {
+  const sectionStyle = {
+    backgroundImage: `url(${hero})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundOpacity: "25%",
+    backgroundPosition: 'center center',
+    // height: '400px', // Set a specific height for the section
+    position: 'relative', // Ensure positioning for the text
+
+  };
+
   return (
     <React.Fragment>
-      <section className="bg-home2 " id="home"style={{ backgroundImage: `url(${hero})`, backgroundSize: '700px', backgroundPosition: "top right"}} >
+      <section className="bg-home2 " id="home" style={sectionStyle} >
         <Container  >
           <Row  className="align-items-center " >
             <Col lg={7} className="">
