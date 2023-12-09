@@ -6,7 +6,9 @@ import CountryOptions from "../SubSection/CountryOptions";
 import JobSearch from "../SubSection/JobSearch";
 import logo from "../../../assets/images/Nextgenjob.png";
 import hero from "../../../assets/images/Herobannarfeatured.png"
+
 const section = () => {
+  
   const sectionStyle = {
     backgroundImage: `url(${hero})`,
     backgroundSize: 'cover',
@@ -17,7 +19,7 @@ const section = () => {
     position: 'relative', // Ensure positioning for the text
 
   };
-
+ 
   return (
     <React.Fragment>
       <section className="bg-home2 " id="home" style={sectionStyle} >
@@ -55,7 +57,7 @@ const section = () => {
                       <div className="mt-3 mt-md-0 h-100">
                         <button
                           className="btn btn-primary submit-btn w-100 h-100"
-                          type="submit"
+                          type="submit" naviagate="/joblist2"
                         >
                           <i className="uil uil-search me-1"></i> Find Job
                         </button>

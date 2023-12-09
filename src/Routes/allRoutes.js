@@ -13,7 +13,6 @@ import PrivacyAndPolicy from "../pages/Company/PrivacyAndPolicy/PrivacyAndPolicy
 // import JobList from "../pages/Jobs/JobList/JobList";
 import JobList2 from "../pages/Jobs/JobList2/JobList2";
 // import JobGrid from "../pages/Jobs/JobGrid/JobGrid";
-import JobGrid2 from "../pages/Jobs/JobGrid2/JobGrid2";
 import JobDetails from "../pages/Jobs/JobDetails/JobDetails";
 import JobsCategories from "../pages/Jobs/JobsCategories/JobsCategories";
 
@@ -42,6 +41,7 @@ import ManageJobs from "../pages/Profile/ManageJobs/ManageJobs";
 import BookMarkJobs from "../pages/Profile/BookMarkJobs/BookMarkJobs";
 import MyProfile from "../pages/Profile/MyProfile/MyProfile";
 import Settings from "../pages/Profile/MyProfile/Settings";
+import Jobs from "../pages/Jobs/JobGrid2/Jobs";
 
 //Home Section
 const Layout2 = React.lazy(() => import('../pages/Home/Layout2/Layout2'));
@@ -73,7 +73,7 @@ const userRoutes = [
   //Jobs Section
   { path: "/jobscategories", component: <JobsCategories /> },
   { path: "/jobdetails", component: <JobDetails /> },
-  { path: "/jobgrid2", component: <JobGrid2 /> },
+  { path: "/Jobs", component: <Jobs/> },
   { path: "/joblist2", component: <JobList2 /> },
 
   //Company Section
