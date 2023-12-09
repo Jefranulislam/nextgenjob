@@ -90,37 +90,10 @@ We are excited to present NextGenJob, our response to the web development projec
   
 - **Vercel:** Hosting and continuous deployment for accessibility and efficiency.
 
-## Installation and Usage
-1. Clone the repository:
-
-    ```bash
-    git clone git clone https://github.com/your-username/nextgenjob.git
- 
-    cd nextgenjob
-    ```
-
-2. Install dependencies:
-
-    ```bash
-    npm install
-    ```
-
-3. Set up environment variables:
-
-    Create a `.env` file in the root directory with the necessary configuration.
-
-4. Start the application:
-
-    ```bash
-    npm start
-    ```
-
-Visit `http://localhost:3000` to access the application.
-
 ## License
 This project is licensed under the [CODE CANVA License](CODECANVA.md).
 ## Contact
-For any questions or concerns, please contact [ @jefranulislam 221002612@eastdelta.edu.bd]
+For any questions or concerns, please contact [221002812@easydelta.edu.bd]
 [221003012@eastdelta.edu.bd]
 [221002812@eastdelta.edu.bd]
 [221000112@eastdelta.edu.bd].
