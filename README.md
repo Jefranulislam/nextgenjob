@@ -94,7 +94,7 @@ We are excited to present NextGenJob, our response to the web development projec
 This project is licensed under the [CODE CANVA License](CODECANVA.md).
 ## Contact
 For any questions or concerns, please contact 
-- [@tareq1023](https://github.com/tareq1023)
+- [@tareqhasanmunna](https://github.com/tareqhasanmunna)
 - [@Jefranulislam](https://github.com/jefranulislam)
 - [@niamulriyadh](https://github.com/niamulriyadh)
 - [@DruvShibaditya](https://github.com/DruvShibaditya)
