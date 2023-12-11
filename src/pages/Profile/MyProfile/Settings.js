@@ -1,23 +1,8 @@
 import React, { useState } from "react";
-import {
-  Col,
-  Row,
-  Nav,
-  NavLink,
-  TabContent,
-  TabPane,
-  Card,
-  Input,
-  Form,
-  NavItem,
-  CardBody,
-  Label
-} from "reactstrap";
+import { Col, Row, Input,Label} from "reactstrap";
 
-import classnames from "classnames";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form"
 
 const Settings = () => {
@@ -25,10 +10,9 @@ const Settings = () => {
   
   const [userRole, setUserRole] = useState(''); 
   const handleRoleChange = (e) => {
-    setUserRole(e.target.value); 
+  setUserRole(e.target.value); 
+   
   };
-
-
 
       //Add to the auth
    const [user]= useAuthState(auth);
@@ -37,28 +21,51 @@ const Settings = () => {
         //Handling the submission with Use Form()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+
+
+    const onSubmitHR = async (data, e) => {
+      e.preventDefault();
+      const {userRole, firstName, lastName, companyName, position, orgAddress, orgPhoneNumber, webAddress } = data;
+      // Process HR data
+      console.log('HR Data:', data);
+    };
+    
+    const onSubmitApplicant = async (data, e) => {
+      e.preventDefault();
+      const {userRole, firstName, lastName, experience, educationBackground, skills, toolsExperience, address, phoneNumber, email } = data;
+      // Process Applicant data
+      console.log('Applicant Data:', data);
+    };
+
+    
+
   const onSubmit = async (data,e)=>{
-    e.preventDefault();
-    const { firstName,lastName } = data;
-  }
+    if (userRole === 'HR') {
+      onSubmitHR(data, e);
+    } else if (userRole === 'applicant') {
+      onSubmitApplicant(data, e);
+    } else {
+    }
+  };
 
 
     return (
-        <div className="w-50 mx-auto mt-5 pt-5">
-              <form action="#">
+        <div className="w-50 mx-auto mt-5 pt-5 pb-5">
+              <form  onSubmit={handleSubmit(onSubmit)} className="bg-light" >
                   <div>
                     <h5 className="fs-17 fw-semibold mb-3 mb-0">My Account</h5>
                     <div className="text-center">
                       <Label for="userRole">Account Type</Label>
-                          <Input type="select" name="userRole" id="userRole" className="input"  >
+                          <Input  {...register("userRole")} type="select" name="userRole" id="userRole"   onChange={(e) => handleRoleChange(e)} value={userRole} className="input bg-purple text-white"  >
                             <option value="">Select Role</option>
                             <option value="HR">HR</option>
                             <option value="applicant">Applicant</option>
                           </Input>
                           <div className="mb-4 profile-user pt-2">
                         <img src={user.photoURL} className="rounded-circle img-thumbnail profile-img"  id="profile-img"  alt=""  />
+                        <h4> {user.displayName}</h4>
                         <div className="p-0 rounded-circle profile-photo-edit">
-                          <input  id="profile-img-file-input"  type="file" onChange={handleRoleChange}  className="profile-img-file-input"  />
+                          <input  id="profile-img-file-input"  type="file"   className="profile-img-file-input"  />
                           <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
                             <i className="uil uil-edit"></i>
                           </label>
@@ -71,25 +78,24 @@ const Settings = () => {
 
                     {userRole === 'HR' && (
                               <div>
-                                <from>
                                   <Row>
                                    <Col lg={6}>
                                     <div className="mb-3">
                                       <label htmlFor="firstName" className="form-label">  First Name  </label>
-                                      <input  type="text"  className="form-control"  id="firstName"  {...register("firstName", { required: true, maxLength: 20 })}  />  </div>
+                                      <input  type="text"  className="form-control" name="firstName"  id="firstName"  {...register("firstName")}  />  </div>
                                   </Col>
                                   <Col lg={6}>
                                     <div className="mb-3">
-                                      <Label htmlFor="lastName" className="form-label">   Last Name  </Label>
-                                      <Input  type="text"   className="form-control"   id="lastName" {...register("lastName")} />
+                                      <label htmlFor="lastName" className="form-label">   Last Name  </label>
+                                      <input  type="text"   className="form-control" name="lastName"  id="lastName" {...register("lastName")} />
                                     </div>
                                   </Col>
                                     </Row>
                                     <Row>
                                     <Col lg={6}>
                                     <div className="mb-3">
-                                      <Label htmlFor="email" className="form-label"> Company Name  </Label>
-                                      <Input type="text"  className="form-control"  id="text" {...register("companyName")} />
+                                      <label htmlFor="CompanyName" className="form-label"> Company Name  </label>
+                                      <input type="text"  className="form-control" name="companyName"  id="text" {...register("companyName")} />
                                     </div>
                                   </Col>
                                   <Col lg={6}>
@@ -99,14 +105,16 @@ const Settings = () => {
                                       <select
                                         className="form-select"
                                         data-trigger
-                                        name="choices-single-categories"
+                                        name="position"
+                                        type="text"
                                         id="choices-single-categories"
                                         aria-label="Default select example"
+                                        {...register("position")}
                                       >
-                                        <option value="4">Sr. Dept. Manager</option>
-                                        <option value="1">CEO</option>
-                                        <option value="3">Human Resource</option>
-                                        <option value="5">Sr.Marketing Manager</option>
+                                        <option value="Sr. Dept. Manager">Sr. Dept. Manager</option>
+                                        <option value="CEO">CEO</option>
+                                        <option value="Human Resource">Human Resource</option>
+                                        <option value="Sr.Marketing Manager">Sr.Marketing Manager</option>
                                       </select>
                                     </div>
                                   </Col>
@@ -114,38 +122,43 @@ const Settings = () => {
                                     <Row>
                                     <Col lg={4}>
                                     <div className="mb-3">
-                                      <Label htmlFor="address" className="form-label"> Organization Location  </Label>
-                                      <Input
+                                      <label htmlFor="orgAddress" className="form-label"> Organization Location  </label>
+                                      <input
                                         type="text"
                                         className="form-control"
-                                        id="email"
+                                        id="address"
+                                        name="orgAddress"
+                                        {...register("orgAddress")}
                                       />
                                     </div>
                                   </Col>
                                     <Col lg={4}>
                                     <div className="mb-3">
-                                      <Label htmlFor="address" className="form-label"> Organization Contact  </Label>
-                                      <Input
+                                      <label htmlFor="orgPhoneNumber" className="form-label"> Organization Contact  </label>
+                                      <input
                                         type="text"
                                         className="form-control"
-                                        id="email"
+                                        name="orgPhoneNumber"
+                                        id="phone"
+                                        {...register("orgPhoneNumber")}
                                       />
                                     </div>
                                   </Col>
                                     <Col lg={4}>
                                     <div className="mb-3">
-                                      <Label htmlFor="address" className="form-label"> Organization Website  </Label>
-                                      <Input
+                                      <label htmlFor="webAddress" className="form-label"> Organization Website  </label>
+                                      <input
                                         type="text"
                                         className="form-control"
-                                        id="email"
+                                        name="webAddress"
+                                        id="webAddress"
+                                        {...register("webAddress")}
                                       />
                                     </div>
                                   </Col>
                                   
                                   </Row>
 
-                                </from>
                               </div>
                            
                            
@@ -154,12 +167,132 @@ const Settings = () => {
 
                             {userRole === 'applicant' && (
                               <div>
-                                {/* Applicant-specific fields */}
-                                <from>
-                                  <label for="applicantField1">Applicant Field 1:</label>
-                                  <input type="text" name="applicantField1" id="applicantField1" />
-                                </from>
-                                {/* Add more Applicant fields as needed */}
+                                
+                                  <Row>
+                                  <Col lg={6}>
+                                    <div className="mb-3">
+                                      <label htmlFor="firstName" className="form-label">   First Name  </label>
+                                      <input  type="text"   className="form-control"  name="firstName"  id="lastName" {...register("firstName")} />
+                                    </div>
+                                  </Col>
+                                  <Col lg={6}>
+                                    <div className="mb-3">
+                                      <label htmlFor="lastName" className="form-label">   Last Name  </label>
+                                      <input  type="text"   className="form-control" name="lastName"   id="lastName" {...register("lastName")} />
+                                    </div>
+                                  </Col>
+                                  </Row>
+                                  <div className="mt-4">
+                    <h5 className="fs-17 fw-semibold mb-3">Resume</h5>
+
+                    <Row>
+                      <Col lg={12}>
+                        <div className="mb-3">
+                          <label
+                            htmlFor="experience"
+                            className="form-label"
+                          >
+                            Experiences
+                          </label>
+                          <textarea className="form-control" rows="5"  name="experience"  {...register("experience")} >
+                          -
+                          -
+                          -
+                          -
+                          -
+                         
+                          </textarea>
+                        </div>
+                        
+                      </Col>
+
+                        <Col lg={12}>
+                        <div className="mb-3">
+                          <label htmlFor="educationBackground"  className="form-label"
+                          >  Education Background  </label>
+                          <textarea className="form-control" rows="5" placeholder="- will Seprate you Education Background " name="educationBackground"  {...register("educationBackground")}>
+                          -
+                          -
+                          -
+                          -
+                          -
+                         
+                          </textarea>
+
+                        </div>
+                        </Col>
+                      <Col lg={6}>
+                        <div className="mb-3">
+                          <label htmlFor="languages" className="form-label">
+                            Skills 
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="skills"
+                            placeholder="(,) Will Seprate your skill set" name="skills"  {...register("skills")}
+                          />
+                        </div>
+                      </Col>
+
+                      <Col lg={6}>
+
+                      <div className="mb-3">
+                          <label htmlFor="languages" className="form-label">
+                            Tools Experiences 
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="Tools"
+                            placeholder="(,) Will separate your tools experience set" name="toolsExperience" {...register("toolsExperience")}
+                          />
+                        </div>
+
+                      </Col>
+                      <Col lg={4}>
+                      <div className="mb-3">
+                          <label htmlFor="languages" className="form-label">
+                            Address 
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="address"
+                            id="address"
+                            {...register("address")}
+                          />
+                        </div>
+                      </Col>
+                      <Col lg={4}>
+                      <div className="mb-3">
+                          <label htmlFor="languages" className="form-label">
+                            Phone Number 
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="phoneNumber"
+                            id="languages"  {...register("phoneNumber")}
+                          />
+                        </div>
+                      </Col>
+                      <Col lg={4}>
+                      <div className="mb-3">
+                          <label htmlFor="languages" className="form-label">
+                            Email Address 
+                          </label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            id="languages"
+                            name="email"
+                            {...register("email")}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>       
                               </div>
                             )}
 
@@ -170,74 +303,10 @@ const Settings = () => {
                     </Row>
                   </div>
 
-                  <div className="mt-4">
-                    <h5 className="fs-17 fw-semibold mb-3">Profile</h5>
-                    <Row>
-                      <Col lg={12}>
-                        <div className="mb-3">
-                          <Label
-                            htmlFor="exampleFormControlTextarea1"
-                            className="form-label"
-                          >
-                            Introduce Yourself
-                          </Label>
-                          <textarea className="form-control" rows="5">
-                            Developer with over 5 years' experience working in
-                            both the public and private sectors. Diplomatic,
-                            personable, and adept at managing sensitive
-                            situations. Highly organized, self-motivated, and
-                            proficient with computers. Looking to boost
-                            students’ satisfactions scores for International
-                            University. Bachelor's degree in communications.
-                          </textarea>
-                        </div>
-                      </Col>
 
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="languages" className="form-label">
-                            Languages
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="languages"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <label
-                            htmlFor="choices-single-location"
-                            className="form-label"
-                          >
-                            Location
-                          </label>
-                          <select
-                            className="form-select"
-                            data-trigger
-                            name="choices-single-location"
-                            id="choices-single-location"
-                            aria-label="Default select example"
-                          >
-                            <option value="ME">Montenegro</option>
-                            <option value="MS">Montserrat</option>
-                            <option value="MA">Morocco</option>
-                            <option value="MZ">Mozambique</option>
-                          </select>
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-
-                
-
-            
                   <div className="mt-4 text-end">
-                    <Link to="" className="btn btn-primary">
-                      Update
-                    </Link>
+                    <input type="submit" to="" className="btn btn-primary"/>
+                 
                   </div>
                 </form>
         </div>
