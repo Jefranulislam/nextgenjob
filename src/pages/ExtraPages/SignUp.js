@@ -8,6 +8,7 @@ import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle } 
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 
+
 const SignUp = () => {
 const [signInWithGoogle, userGoogle, userLoading, userError]= useSignInWithGoogle(auth);
 const [createUserWithEmailAndPassword, user,loading,error]= useCreateUserWithEmailAndPassword(auth);
@@ -16,13 +17,13 @@ const naviagate = useNavigate();
 let signinErrors;
 
 
-
 const onSubmit = async (data)=>{
+
   try{
     await createUserWithEmailAndPassword(data.email,data.password);
+    // alert("New User Signup on website");
+    naviagate('/myprofile/settings');
 
-    alert("New User Signup on website");
-    naviagate('/myprofile');
     console.log(data);
   }
   catch (error){
@@ -31,13 +32,20 @@ console.error(error);
 }
 
 if(userGoogle || user){
- alert("User Already Sign in ");
- naviagate('/myprofile');
+
+ naviagate('/myprofile/settings');
+
 }
+
+
+
+
+
   
 document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
   return (
     <React.Fragment>
+
       <div>
         <div className="main-content">
           <div className="page-content">
@@ -157,7 +165,6 @@ document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
                                   >
                                     Sign Up
                                   </button>
-                                  
                                 </div>
                               </form>
                               <div className="mt-3 text-center">

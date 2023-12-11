@@ -1,86 +1,33 @@
-import React, { useState } from "react";
-import { Col, Row, Modal, ModalBody, Input, Label } from "reactstrap";
-import { Link } from "react-router-dom";
-
-//Job Images
-import jobImage1 from "../../../assets/images/featured-job/img-01.png";
-import jobImage2 from "../../../assets/images/featured-job/img-02.png";
-import jobImage3 from "../../../assets/images/featured-job/img-03.png";
-
+import React, { useEffect, useState } from "react";
+import { Col, Row, ModalBody, Input, Label, Modal } from "reactstrap";
+import { Link, useParams } from "react-router-dom";
+// eslint-disable-next-line
 const JobVacancyPost = () => {
   //Apply Now Model
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);
+  
+  const [jobs, setjobs] = useState([]);
 
-  const jobVacancyPost = [
-    {
-      id: 1,
-      companyImg: jobImage1,
-      jobDescription: "HTML Developer",
-      experience: "0-2 Yrs Exp.",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "California",
-      salary: "$250 - $800 / month",
-      fullTime: true,
-      timing: "Full Time",
-      addclassNameBookmark: true,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-warning-subtle text-warning",
-          badgeName: "Urgent"
-        },
-        {
-          id: 2,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ]
-    },
-    {
-      id: 2,
-      companyImg: jobImage2,
-      jobDescription: "Marketing Director",
-      experience: "2-4 Yrs Exp.",
-      companyName: "Creative Agency",
-      location: "New York",
-      salary: "$250 - $800 / month",
-      partTime: true,
-      timing: "Full Time",
-      addclassNameBookmark: false,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ]
-    },
-    {
-      id: 3,
-      companyImg: jobImage3,
-      jobDescription: "HTML Developer",
-      experience: "2-4 Yrs Exp.",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "California",
-      salary: "$250 - $800 / month",
-      freeLance: true,
-      timing: "Freelance",
-      addclassNameBookmark: false,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-blue-subtle text-blue",
-          badgeName: "Internship"
-        }
-      ]
-    }
-  ];
+  useEffect(() => {
+    fetch(`http://localhost:4000/jobs/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setjobs(data);
+        console.log(data); 
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+
   return (
     <React.Fragment>
-      {jobVacancyPost.map((jobVacancyPostDetails, key) => (
+
+      {jobs.map((jobVacancyPostDetails) => (
         <div
-          key={key}
+          key={jobVacancyPostDetails._id}
           className={
             jobVacancyPostDetails.addclassNameBookmark === true
               ? "job-box bookmark-post card mt-4"

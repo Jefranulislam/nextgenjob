@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Modal, ModalBody, Input, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -12,96 +12,28 @@ const JobVacancy = () => {
   //Apply Now Model
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);
+  const [jobs, setjobs] = useState([]);
 
-  const jobVacancy = [
-    {
-      id: 1,
-      companyImg: jobImage1,
-      jobDescription: "Magento Developer",
-      experience: "0-2 Yrs Exp.",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "California",
-      salary: "$250 - $800 / month",
-      fullTime: true,
-      timing: "Full Time",
-      addclassNameBookmark: true,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-warning-subtle text-warning",
-          badgeName: "Urgent"
-        },
-        {
-          id: 2,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ]
-    },
-    {
-      id: 2,
-      companyImg: jobImage2,
-      jobDescription: "Marketing Director",
-      experience: "2-4 Yrs Exp.",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "New York",
-      salary: "$250 - $800 / month",
-      partTime: true,
-      timing: "Full Time",
-      addclassNameBookmark: false,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ]
-    },
-    {
-      id: 3,
-      companyImg: jobImage3,
-      jobDescription: "HTML Developer",
-      experience: "2-4 Yrs Exp.",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "California",
-      salary: "$250 - $800 / month",
-      freeLance: true,
-      timing: "Freelance",
-      addclassNameBookmark: false,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-blue-subtle text-blue",
-          badgeName: "Internship"
-        }
-      ]
-    },
-    {
-      id: 4,
-      companyImg: jobImage4,
-      jobDescription: "Product Sales Specialist",
-      experience: "5+ Yrs Exp.",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "California",
-      salary: "$250 - $800 / month",
-      fullTime: true,
-      timing: "Freelance",
-      addclassNameBookmark: true,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ]
-    }
-  ];
+  useEffect(() => {
+    fetch('http://localhost:4000/jobs')
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+            setjobs(data);
+
+        })
+        .catch(error => {
+            console.error(error)
+        })
+}, []);
+
+
 
   return (
     <React.Fragment>
-      {jobVacancy.map((jobVacancyDetails, key) => (
+      {jobs.map((jobVacancyDetails, key) => (
         <div
-          key={key}
+          key={jobVacancyDetails._id}
           className={
             jobVacancyDetails.addclassNameBookmark === true
               ? "job-box bookmark-post card mt-4"

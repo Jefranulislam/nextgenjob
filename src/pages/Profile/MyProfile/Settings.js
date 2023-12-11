@@ -18,100 +18,155 @@ import classnames from "classnames";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { Link } from "react-router-dom";
-
-//Images Import
+import { useForm } from "react-hook-form"
 
 const Settings = () => {
 
-    const [user]= useAuthState(auth);
+  
+  const [userRole, setUserRole] = useState(''); 
+  const handleRoleChange = (e) => {
+    setUserRole(e.target.value); 
+  };
+
+
+
+      //Add to the auth
+   const [user]= useAuthState(auth);
+
+
+        //Handling the submission with Use Form()
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async (data,e)=>{
+    e.preventDefault();
+    const { firstName,lastName } = data;
+  }
+
+
     return (
-        <div>
-              <Form action="#">
+        <div className="w-50 mx-auto mt-5 pt-5">
+              <form action="#">
                   <div>
                     <h5 className="fs-17 fw-semibold mb-3 mb-0">My Account</h5>
                     <div className="text-center">
-                      <div className="mb-4 profile-user">
-                        <img
-                          src={user.photoURL}
-                          className="rounded-circle img-thumbnail profile-img"
-                          id="profile-img"
-                          alt=""
-                        />
+                      <Label for="userRole">Account Type</Label>
+                          <Input type="select" name="userRole" id="userRole" className="input"  >
+                            <option value="">Select Role</option>
+                            <option value="HR">HR</option>
+                            <option value="applicant">Applicant</option>
+                          </Input>
+                          <div className="mb-4 profile-user pt-2">
+                        <img src={user.photoURL} className="rounded-circle img-thumbnail profile-img"  id="profile-img"  alt=""  />
                         <div className="p-0 rounded-circle profile-photo-edit">
-                          <Input
-                            id="profile-img-file-input"
-                            type="file"
-                            className="profile-img-file-input"
-                          />
-                          <Label
-                            htmlFor="profile-img-file-input"
-                            className="profile-photo-edit avatar-xs"
-                          >
+                          <input  id="profile-img-file-input"  type="file" onChange={handleRoleChange}  className="profile-img-file-input"  />
+                          <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
                             <i className="uil uil-edit"></i>
-                          </Label>
+                          </label>
                         </div>
                       </div>
                     </div>
                     <Row>
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <label htmlFor="firstName" className="form-label">
-                            First Name
-                          </label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="firstName"
-                          />
-                        </div>
-                      </Col>
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="lastName" className="form-label">
-                            Last Name
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="lastName"
-                          />
-                        </div>
-                      </Col>
 
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <label
-                            htmlFor="choices-single-categories"
-                            className="form-label"
-                          >
-                            Account Type
-                          </label>
-                          <select
-                            className="form-select"
-                            data-trigger
-                            name="choices-single-categories"
-                            id="choices-single-categories"
-                            aria-label="Default select example"
-                          >
-                            <option value="4">Accounting</option>
-                            <option value="1">IT & Software</option>
-                            <option value="3">Marketing</option>
-                            <option value="5">Banking</option>
-                          </select>
-                        </div>
-                      </Col>
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="email" className="form-label">
-                            Email
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="email"
-                          />
-                        </div>
-                      </Col>
+
+
+                    {userRole === 'HR' && (
+                              <div>
+                                <from>
+                                  <Row>
+                                   <Col lg={6}>
+                                    <div className="mb-3">
+                                      <label htmlFor="firstName" className="form-label">  First Name  </label>
+                                      <input  type="text"  className="form-control"  id="firstName"  {...register("firstName", { required: true, maxLength: 20 })}  />  </div>
+                                  </Col>
+                                  <Col lg={6}>
+                                    <div className="mb-3">
+                                      <Label htmlFor="lastName" className="form-label">   Last Name  </Label>
+                                      <Input  type="text"   className="form-control"   id="lastName" {...register("lastName")} />
+                                    </div>
+                                  </Col>
+                                    </Row>
+                                    <Row>
+                                    <Col lg={6}>
+                                    <div className="mb-3">
+                                      <Label htmlFor="email" className="form-label"> Company Name  </Label>
+                                      <Input type="text"  className="form-control"  id="text" {...register("companyName")} />
+                                    </div>
+                                  </Col>
+                                  <Col lg={6}>
+                                    
+                                    <div className="mb-3">
+                                      <label htmlFor="choices-single-categories"  className="form-label"  >   Your Position In organization   </label>
+                                      <select
+                                        className="form-select"
+                                        data-trigger
+                                        name="choices-single-categories"
+                                        id="choices-single-categories"
+                                        aria-label="Default select example"
+                                      >
+                                        <option value="4">Sr. Dept. Manager</option>
+                                        <option value="1">CEO</option>
+                                        <option value="3">Human Resource</option>
+                                        <option value="5">Sr.Marketing Manager</option>
+                                      </select>
+                                    </div>
+                                  </Col>
+                                  </Row>
+                                    <Row>
+                                    <Col lg={4}>
+                                    <div className="mb-3">
+                                      <Label htmlFor="address" className="form-label"> Organization Location  </Label>
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="email"
+                                      />
+                                    </div>
+                                  </Col>
+                                    <Col lg={4}>
+                                    <div className="mb-3">
+                                      <Label htmlFor="address" className="form-label"> Organization Contact  </Label>
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="email"
+                                      />
+                                    </div>
+                                  </Col>
+                                    <Col lg={4}>
+                                    <div className="mb-3">
+                                      <Label htmlFor="address" className="form-label"> Organization Website  </Label>
+                                      <Input
+                                        type="text"
+                                        className="form-control"
+                                        id="email"
+                                      />
+                                    </div>
+                                  </Col>
+                                  
+                                  </Row>
+
+                                </from>
+                              </div>
+                           
+                           
+                           )}
+
+
+                            {userRole === 'applicant' && (
+                              <div>
+                                {/* Applicant-specific fields */}
+                                <from>
+                                  <label for="applicantField1">Applicant Field 1:</label>
+                                  <input type="text" name="applicantField1" id="applicantField1" />
+                                </from>
+                                {/* Add more Applicant fields as needed */}
+                              </div>
+                            )}
+
+
+
+
+
                     </Row>
                   </div>
 
@@ -173,161 +228,18 @@ const Settings = () => {
                           </select>
                         </div>
                       </Col>
-                      <Col lg={12}>
-                        <div className="mb-3">
-                          <Label htmlFor="attachmentscv" className="form-label">
-                            Attachments CV
-                          </Label>
-                          <Input
-                            className="form-control"
-                            type="file"
-                            id="attachmentscv"
-                          />
-                        </div>
-                      </Col>
                     </Row>
                   </div>
 
-                  <div className="mt-4">
-                    <h5 className="fs-17 fw-semibold mb-3">Social Media</h5>
-                    <Row>
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="facebook" className="form-label">
-                            Facebook
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="facebook"
-                            to="https://www.facebook.com"
-                          />
-                        </div>
-                      </Col>
+                
 
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="twitter" className="form-label">
-                            Twitter
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="twitter"
-                            to="https://www.twitter.com"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="linkedin" className="form-label">
-                            Linkedin
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="linkedin"
-                            to="https://www.linkedin.com"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label htmlFor="whatsapp" className="form-label">
-                            Whatsapp
-                          </Label>
-                          <Input
-                            type="text"
-                            className="form-control"
-                            id="whatsapp"
-                            to="https://www.whatsapp.com"
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-
-                  <div className="mt-4">
-                    <h5 className="fs-17 fw-semibold mb-3 mb-3">
-                      Change Password
-                    </h5>
-                    <Row>
-                      <Col lg={12}>
-                        <div className="mb-3">
-                          <Label
-                            htmlFor="current-password-input"
-                            className="form-label"
-                          >
-                            Current password
-                          </Label>
-                          <Input
-                            type="password"
-                            className="form-control"
-                            placeholder="Enter Current password"
-                            id="current-password-input"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label
-                            htmlFor="new-password-input"
-                            className="form-label"
-                          >
-                            New password
-                          </Label>
-                          <Input
-                            type="password"
-                            className="form-control"
-                            placeholder="Enter new password"
-                            id="new-password-input"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col lg={6}>
-                        <div className="mb-3">
-                          <Label
-                            htmlFor="confirm-password-input"
-                            className="form-label"
-                          >
-                            Confirm Password
-                          </Label>
-                          <Input
-                            type="password"
-                            className="form-control"
-                            placeholder="Confirm Password"
-                            id="confirm-password-input"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col lg={12}>
-                        <div className="form-check">
-                          <Input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="verification"
-                          />
-                          <Label
-                            className="form-check-label"
-                            htmlFor="verification"
-                          >
-                            Enable Two-Step Verification via email
-                          </Label>
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
+            
                   <div className="mt-4 text-end">
                     <Link to="" className="btn btn-primary">
                       Update
                     </Link>
                   </div>
-                </Form>
+                </form>
         </div>
     );
 };

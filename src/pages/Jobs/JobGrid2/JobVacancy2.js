@@ -1,145 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Modal, ModalBody, Input, Label } from "reactstrap";
 import { Link } from "react-router-dom";
-
-import jobImage1 from "../../../assets/images/featured-job/img-01.png";
-import jobImage2 from "../../../assets/images/featured-job/img-02.png";
-import jobImage3 from "../../../assets/images/featured-job/img-03.png";
-import jobImage4 from "../../../assets/images/featured-job/img-04.png";
-import jobImage5 from "../../../assets/images/featured-job/img-05.png";
-import jobImage6 from "../../../assets/images/featured-job/img-06.png";
-import jobImage7 from "../../../assets/images/featured-job/img-07.png";
-import jobImage8 from "../../../assets/images/featured-job/img-08.png";
-import jobImage9 from "../../../assets/images/featured-job/img-09.png";
 
 const JobVacancy2 = () => {
   //Apply Now Model
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);
+  const [jobs, setjobs] = useState([]);
 
-  const jobVacancy2 = [
-    {
-      id: 1,
-      companyImg: jobImage1,
-      jobDescription: "Magento Developer",
-      experience: "Min. 1 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Developer",
-      salary: "$500/ month",
-      jobTimeDate: "2 min ago",
-      addclassNameBookmark: false,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 2,
-      companyImg: jobImage2,
-      jobDescription: "Marketing Director",
-      experience: "Min. 3 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Director",
-      salary: "$850/ month",
-      jobTimeDate: "15 days ago",
-      addclassNameBookmark: true,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 3,
-      companyImg: jobImage3,
-      jobDescription: "Magento Developer",
-      experience: "0-1 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Developer",
-      salary: "$780/ month",
-      jobTimeDate: "2 hrs ago",
-      addclassNameBookmark: false,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 4,
-      companyImg: jobImage4,
-      jobDescription: "Project Leader",
-      experience: "2 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Developer",
-      salary: "$900/ month",
-      jobTimeDate: "30 min ago",
-      addclassNameBookmark: false,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 5,
-      companyImg: jobImage5,
-      jobDescription: "Graphic Designer",
-      experience: "0.6 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Designer",
-      salary: "$350/ month",
-      jobTimeDate: "2 days ago",
-      addclassNameBookmark: false,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 6,
-      companyImg: jobImage6,
-      jobDescription: "Store Manager",
-      experience: "Min. 1.5 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Manager",
-      salary: "$950/ month",
-      jobTimeDate: "2 days ago",
-      addclassNameBookmark: true,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 7,
-      companyImg: jobImage7,
-      jobDescription: "Product Designer",
-      experience: "Min. 1 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Developer",
-      salary: "$750/ month",
-      jobTimeDate: "1 hrs ago",
-      addclassNameBookmark: true,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 8,
-      companyImg: jobImage8,
-      jobDescription: "Business Associate",
-      experience: "Min. 1 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Developer",
-      salary: "$780/ month",
-      jobTimeDate: "2 days ago",
-      addclassNameBookmark: false,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    },
-    {
-      id: 9,
-      companyImg: jobImage9,
-      jobDescription: "Product Sales Specialist",
-      experience: "Min. 1 Year",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      jobType: "Developer",
-      salary: "$780/ Month",
-      jobTimeDate: "2 days ago",
-      addclassNameBookmark: false,
-      jobDetails:
-        "As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent."
-    }
-  ];
+  useEffect(() => {
+    fetch('http://localhost:4000/jobs')
+        .then(res => res.json())
+        .then(data => {
+            setjobs(data);
+
+        })
+        .catch(error => {
+            console.error(error)
+        })
+}, []);
+
+  
   return (
     <React.Fragment>
-      {jobVacancy2.map((jobVacancy2Details, key) => (
-        <Col lg={4} md={6} className="mt-4" key={key}>
+      {jobs.map((jobVacancy2Details) => (
+        <Col lg={4} md={6} className="mt-4" key={jobVacancy2Details._id}>
           <div
             className={
               jobVacancy2Details.addclassNameBookmark === true
@@ -154,16 +39,16 @@ const JobVacancy2 = () => {
                 </Link>
               </div>
               <div>
-                <Link to="/companydetails">
+                <Link to={`/jobdetails/${jobVacancy2Details._id}`}>
                   <img
                     src={jobVacancy2Details.companyImg}
                     alt=""
-                    className="img-fluid rounded-3"
+                    className="img-fluid rounded-3 w-50"
                   />
                 </Link>
               </div>
               <div className="mt-4">
-                <Link to="/jobdetails" className="primary-link">
+                <Link to={`/jobdetails/${jobVacancy2Details._id}`}  className="primary-link">
                   <h5 className="fs-17 mb-1">
                     {jobVacancy2Details.jobDescription}
                   </h5>

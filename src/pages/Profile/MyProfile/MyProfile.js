@@ -35,8 +35,8 @@ const MyProfile = () => {
       <section className="section">
         <Container>
           <Row>
-            <LeftSideContent />
-            <RightSideContent />
+            <LeftSideContent auth={auth} />
+            <RightSideContent auth={auth} />
           </Row>
         </Container>
       </section>

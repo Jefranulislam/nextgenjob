@@ -23,7 +23,6 @@ import CandidateDetails from "../pages/CandidateAndCompany/CandidateDetails/Cand
 import CompanyList from "../pages/CandidateAndCompany/CompanyList/CompanyList";
 import CompanyDetails from "../pages/CandidateAndCompany/CompanyDetails/CompanyDetails";
 
-
 //Contacts
 import Contact from "../pages/Contact/Contact";
 
@@ -44,12 +43,11 @@ import Settings from "../pages/Profile/MyProfile/Settings";
 import Jobs from "../pages/Jobs/JobGrid2/Jobs";
 
 //Home Section
-const Layout2 = React.lazy(() => import('../pages/Home/Layout2/Layout2'));
+const Layout2 = React.lazy(() => import("../pages/Home/Layout2/Layout2"));
 
 const userRoutes = [
   //profile Section(User Profile)
   { path: "/bookmarkjobpost", component: <BookMarkJobPost /> },
-  
   { path: "/myprofile", component: <MyProfile /> },
   { path: "/myprofile/settings", component: <Settings /> },
   { path: "/bookmarkjobs", component: <BookMarkJobs /> },
@@ -60,8 +58,6 @@ const userRoutes = [
 
   //Contact
   { path: "/contact", component: <Contact /> },
-
-
 
   //Candidate and Company Section
   { path: "/companydetails", component: <CompanyDetails /> },
@@ -79,10 +75,10 @@ const userRoutes = [
   //Company Section
   { path: "/privacyandpolicy", component: <PrivacyAndPolicy /> },
   { path: "/team", component: <Team /> },
-  { path: "/about-us", component: <AboutUs/> },
+  { path: "/about-us", component: <AboutUs /> },
 
   //Home Section
-  { path: "/", component: <Layout2 /> }
+  { path: "/", component: <Layout2 /> },
 ];
 
 const authRoutes = [
@@ -90,6 +86,6 @@ const authRoutes = [
   { path: "/comingsoon", component: <ComingSoon /> },
   { path: "/resetpassword", component: <ResetPassword /> },
   { path: "/signup", component: <SignUp /> },
-  { path: "/signin", component: <SignIn /> }
+  { path: "/signin", component: <SignIn /> },
 ];
 export { userRoutes, authRoutes };

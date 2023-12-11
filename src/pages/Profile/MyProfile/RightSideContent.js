@@ -223,12 +223,7 @@ const RightSideContent = () => {
                 </div>
               </TabPane>
               <TabPane tabId="2">
-              
-
-
                 <Settings></Settings>
-
-
               </TabPane>
             </TabContent>
           </CardBody>

@@ -266,7 +266,7 @@ const CountryOptions = () => {
       <Select
         options={options}
         className="choices selectForm__inner "
-        defaultValue={{ label: "Afghanistan", value: 0 }}
+        defaultValue={{ label: "Bangladesh", value: 0 }}
         styles={colourStyles}
       />
     </React.Fragment>

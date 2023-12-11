@@ -1,20 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardBody, Col, Row } from "reactstrap";
+import { Link, useParams } from "react-router-dom";
 
-//Import Images
-import JobDetailImage from "../../../assets/images/job-detail.jpg";
-import JobImage10 from "../../../assets/images/featured-job/img-10.png";
-import { Link } from "react-router-dom";
+const JobDetailsDescription = ({jobId}) => {
+  const [jobs, setjobs] = useState([]);
 
-const JobDetailsDescription = () => {
+  useEffect(() => {
+    fetch(`http://localhost:4000/jobs/${jobId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setjobs(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [jobId]);
+
+
+
+
+  
   return (
     <React.Fragment>
-      <Card className="job-detail overflow-hidden">
+      {jobs.map((jobDetails) => (
+        <Card lg={4} md={6} className="job-detail overflow-hidden" key={jobDetails._id}>
+          <h1> {jobDetails.companyName} </h1>
         <div>
-          <img src={JobDetailImage} alt="" className="img-fluid" />
+          <img src={jobDetails.companyImg} alt="" className="img-fluid" />
           <div className="job-details-compnay-profile">
             <img
-              src={JobImage10}
+              src={jobDetails.companyImg}
               alt=""
               className="img-fluid rounded-3 rounded-3"
             />
@@ -219,6 +235,7 @@ const JobDetailsDescription = () => {
           </div>
         </CardBody>
       </Card>
+      ))};
     </React.Fragment>
   );
 };

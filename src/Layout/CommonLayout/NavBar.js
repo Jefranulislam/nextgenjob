@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Col, Row, Container, Collapse, NavbarToggler, NavItem, Dropdown,DropdownToggle,DropdownMenu,ButtonToggle} from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,7 +22,6 @@ const NavBar = () => {
 
 
 
-
   const navigate = useNavigate();
   const [user]  = useAuthState(auth);
 
@@ -41,7 +40,7 @@ const NavBar = () => {
       <nav className={"navbar navbar-expand-lg fixed-top sticky p-0"} id="navigation">
         <Container fluid className="custom-container container">
           <Row className="w-100 align-items-center">
-            <Col xs={2}>
+            <Col xs={1}>
               <Link className="navbar-brand text-dark fw-bold" to="/">
                 <img src={logo} height="22" alt="" className="logo-dark" />
                 <img src={logo} height="22" alt="" className="logo-light" />
@@ -70,10 +69,10 @@ const NavBar = () => {
                 </ul>
               </Collapse>
             </Col>
-            <Col xs={2} className="d-flex justify-content-center border m-2 border-primary-subtle border-1 rounded-5 ">
+            <Col xs={3} className="d-flex justify-content-center  ">
               {user ? (
 
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center border m-2 border-primary-subtle border-1 rounded-5">
                         <img src={user.photoURL } alt={user.displayName} className="rounded-circle me-2" style={{ height: '40px', width: '40px' }} />
                     <div className="me-3">{user.displayName || user.email}
                     </div> 
@@ -110,14 +109,14 @@ const NavBar = () => {
                       </div>
                     </div>
                   </Link>
-                  <Link to="#" className="text-dark notification-item d-block">
+                  <Link to="/jobs" className="text-dark notification-item d-block">
                     <div className="d-flex align-items-center">
                       <div className="flex-grow-1">
                         <h6 className="mt-0 mb-1 fs-14">Jobs</h6>
                       </div>
                     </div>
                   </Link>
-                  <Link to="#" className="text-dark notification-item d-block">
+                  <Link to="/myprofile/settings" className="text-dark notification-item d-block">
                     <div className="d-flex align-items-center">
                       <div className="flex-grow-1">
                         <h6 className="mt-0 mb-1 fs-14">
