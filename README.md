@@ -93,9 +93,10 @@ We are excited to present NextGenJob, our response to the web development projec
 ## License
 This project is licensed under the [CODE CANVA License](CODECANVA.md).
 ## Contact
-For any questions or concerns, please contact [221002812@easydelta.edu.bd]
-[221003012@eastdelta.edu.bd]
-[221002812@eastdelta.edu.bd]
-[221000112@eastdelta.edu.bd].
+For any questions or concerns, please contact 
+- [@tareqhasanmunna](https://github.com/tareqhasanmunna)
+- [@Jefranulislam](https://github.com/jefranulislam)
+- [@niamulriyadh](https://github.com/niamulriyadh)
+- [@DruvShibaditya](https://github.com/DruvShibaditya)
 
 ---
