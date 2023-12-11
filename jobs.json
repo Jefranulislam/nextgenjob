@@ -1,0 +1,257 @@
+[
+{
+  "companyImg": "https://ibb.co/JFnLKXC",
+  "jobDescription": "Software Engineer",
+  "experience": "Min. 3 Years",
+  "companyName": "East Delta University",
+  "jobType": "Engineering",
+  "salary": "৳80,000/ month",
+  "jobTimeDate": "1 day ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Develop and maintain scalable software solutions.",
+  "jobRequirements": "Bachelor's or Master's degree in Computer Science or related field.",
+  "educationBackground": "Bachelor's or Master's degree in Computer Science or related field.",
+  "image": "path/to/software_engineer_image.jpg",
+  "positionSkills": [
+    "Proficiency in Java, Python, or JavaScript.",
+    "Database management skills.",
+    "Strong problem-solving abilities.",
+    "Knowledge of Agile/Scrum methodologies."
+  ],
+  "additionalQualifications": [
+    "Excellent communication and teamwork skills.",
+    "Ability to work in a fast-paced environment.",
+    "Adaptability to learn and apply new technologies quickly."
+  ],
+  "positionResponsibilities": [
+    "Design, develop, and implement software solutions.",
+    "Collaborate with cross-functional teams for feature development.",
+    "Debug and upgrade existing software.",
+    "Conduct code reviews to maintain code quality."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/JFnLKXC",
+  "jobDescription": "Community Outreach Coordinator",
+  "experience": "Min. 2 Years",
+  "companyName": "East Delta University Social Service Club",
+  "jobType": "Community Service",
+  "salary": "৳45,000/ month",
+  "jobTimeDate": "1 day ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Plan and execute community outreach programs.",
+  "jobRequirements": "Experience in social work or community engagement.",
+  "educationBackground": "Degree in Social Work, Sociology, or related field.",
+  "image": "path/to/social_service_image.jpg",
+  "positionSkills": [
+    "Excellent communication and interpersonal skills.",
+    "Organizational and event planning abilities.",
+    "Empathy and understanding of community needs."
+  ],
+  "additionalQualifications": [
+    "Strong leadership and teamwork skills.",
+    "Ability to work effectively with diverse populations."
+  ],
+  "positionResponsibilities": [
+    "Develop and implement community service projects.",
+    "Collaborate with volunteers and partner organizations.",
+    "Evaluate and report on the impact of outreach programs."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/P99BB7Q",
+  "jobDescription": "Cultural Events Coordinator",
+  "experience": "Min. 2 Years",
+  "companyName": "East Delta University Cultural Club - EDUCC",
+  "jobType": "Event Management",
+  "salary": "৳50,000/ month",
+  "jobTimeDate": "5 hours ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Organize cultural events and activities.",
+  "jobRequirements": "Experience in event planning or cultural activities.",
+  "educationBackground": "Related degree in Arts, Culture, or Event Management.",
+  "image": "path/to/cultural_club_image.jpg",
+  "positionSkills": [
+    "Creative event planning and execution.",
+    "Knowledge of various cultural activities and traditions.",
+    "Budgeting and time management skills."
+  ],
+  "additionalQualifications": [
+    "Ability to collaborate with diverse cultural groups.",
+    "Strong communication and negotiation abilities."
+  ],
+  "positionResponsibilities": [
+    "Plan and execute cultural events and performances.",
+    "Coordinate with artists and performers.",
+    "Promote cultural initiatives within the university community."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/6tDncFr",
+  "jobDescription": "Video Production Specialist",
+  "experience": "Min. 2 Years",
+  "companyName": "East Delta University Film and Comedy Club",
+  "jobType": "Media Production",
+  "salary": "৳55,000/ month",
+  "jobTimeDate": "3 days ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Produce and edit video content.",
+  "jobRequirements": "Experience in video production or editing.",
+  "educationBackground": "Degree in Film Studies, Media Production, or related field.",
+  "image": "path/to/film_comedy_image.jpg",
+  "positionSkills": [
+    "Proficiency in video editing software.",
+    "Storyboarding and scriptwriting abilities.",
+    "Knowledge of camera operations and lighting techniques."
+  ],
+  "additionalQualifications": [
+    "Creativity and attention to detail.",
+    "Ability to work under tight deadlines."
+  ],
+  "positionResponsibilities": [
+    "Create and edit video content for the club.",
+    "Collaborate with writers and directors.",
+    "Ensure high-quality production standards."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/CmqQzw0",
+  "jobDescription": "Business Development Manager",
+  "experience": "Min. 3 Years",
+  "companyName": "EDU Business Club",
+  "jobType": "Business Development",
+  "salary": "৳70,000/ month",
+  "jobTimeDate": "12 hours ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Drive business growth and development strategies.",
+  "jobRequirements": "Experience in business development or sales.",
+  "educationBackground": "Degree in Business Administration, Marketing, or related field.",
+  "image": "path/to/business_club_image.jpg",
+  "positionSkills": [
+    "Market research and analysis skills.",
+    "Negotiation and persuasion abilities.",
+    "Strategic planning and decision-making."
+  ],
+  "additionalQualifications": [
+    "Strong networking and relationship-building skills.",
+    "Leadership and team management capabilities."
+  ],
+  "positionResponsibilities": [
+    "Identify new business opportunities.",
+    "Develop and maintain client relationships.",
+    "Create and implement business growth strategies."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/hMMqKxh",
+  "jobDescription": "Event Coordinator",
+  "experience": "Min. 2 Years",
+  "companyName": "TEDxEast Delta University",
+  "jobType": "Event Management",
+  "salary": "৳60,000/ month",
+  "jobTimeDate": "6 hours ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Coordinate and manage TEDx events.",
+  "jobRequirements": "Experience in event management or similar role.",
+  "educationBackground": "Degree in Event Management, Hospitality, or related field.",
+  "image": "path/to/tedx_image.jpg",
+  "positionSkills": [
+    "Event planning and organization skills.",
+    "Budgeting and resource management abilities.",
+    "Strong communication and interpersonal skills."
+  ],
+  "additionalQualifications": [
+    "Ability to work under pressure and meet deadlines.",
+    "Problem-solving and decision-making capabilities."
+  ],
+  "positionResponsibilities": [
+    "Plan and oversee TEDx events.",
+    "Coordinate with speakers and sponsors.",
+    "Ensure successful execution of events."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/hMMqKxh",
+  "jobDescription": "Event Coordinator",
+  "experience": "Min. 2 Years",
+  "companyName": "TEDxEast Delta University",
+  "jobType": "Event Management",
+  "salary": "৳60,000/ month",
+  "jobTimeDate": "6 hours ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Coordinate and manage TEDx events.",
+  "jobRequirements": "Experience in event management or similar role.",
+  "educationBackground": "Degree in Event Management, Hospitality, or related field.",
+  "image": "path/to/tedx_image.jpg",
+  "positionSkills": [
+    "Event planning and organization skills.",
+    "Budgeting and resource management abilities.",
+    "Strong communication and interpersonal skills."
+  ],
+  "additionalQualifications": [
+    "Ability to work under pressure and meet deadlines.",
+    "Problem-solving and decision-making capabilities."
+  ],
+  "positionResponsibilities": [
+    "Plan and oversee TEDx events.",
+    "Coordinate with speakers and sponsors.",
+    "Ensure successful execution of events."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/CmqQzw0",
+  "jobDescription": "Debate Coach",
+  "experience": "Min. 4 Years",
+  "companyName": "East Delta University Debating Society - EDUDS",
+  "jobType": "Education",
+  "salary": "৳65,000/ month",
+  "jobTimeDate": "3 days ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Coach and mentor students in debating.",
+  "jobRequirements": "Extensive experience in debate coaching or public speaking.",
+  "educationBackground": "Degree in Communication Studies, Political Science, or related field.",
+  "image": "path/to/debate_club_image.jpg",
+  "positionSkills": [
+    "Expertise in debate formats and strategies.",
+    "Strong communication and leadership skills.",
+    "Critical thinking and argumentation abilities."
+  ],
+  "additionalQualifications": [
+    "Experience in tournament adjudication.",
+    "Ability to inspire and motivate students."
+  ],
+  "positionResponsibilities": [
+    "Train students in debate techniques.",
+    "Organize debate workshops and tournaments.",
+    "Guide students in research and argumentation."
+  ]
+},
+{
+  "companyImg": "https://ibb.co/JFnLKXC",
+  "jobDescription": "AI Researcher",
+  "experience": "Min. 5 Years",
+  "companyName": "Department of Computer Science and Engineering",
+  "jobType": "Research",
+  "salary": "৳90,000/ month",
+  "jobTimeDate": "1 day ago",
+  "addclassNameBookmark": false,
+  "jobDetails": "Conduct research in Artificial Intelligence.",
+  "jobRequirements": "Experience in AI research, machine learning, or related field.",
+  "educationBackground": "Ph.D. or Master's in Computer Science, AI, or relevant field.",
+  "image": "path/to/cse_image.jpg",
+  "positionSkills": [
+    "Strong understanding of machine learning algorithms.",
+    "Proficiency in programming languages like Python, R, or C++.",
+    "Analytical and problem-solving skills."
+  ],
+  "additionalQualifications": [
+    "Publication record in AI or ML conferences/journals.",
+    "Ability to work independently and in a team."
+  ],
+  "positionResponsibilities": [
+    "Conduct AI research projects.",
+    "Develop and implement AI models.",
+    "Publish research findings and contribute to academic discourse."
+  ]
+},
+]
