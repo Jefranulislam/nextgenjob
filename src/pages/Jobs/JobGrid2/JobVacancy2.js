@@ -8,6 +8,7 @@ const JobVacancy2 = () => {
   const openModal = () => setModal(!modal);
   const [jobs, setjobs] = useState([]);
 
+
   useEffect(() => {
     fetch('http://localhost:4000/jobs')
         .then(res => res.json())
@@ -20,7 +21,9 @@ const JobVacancy2 = () => {
         })
 }, []);
 
-  
+
+
+
   return (
     <React.Fragment>
       {jobs.map((jobVacancy2Details) => (

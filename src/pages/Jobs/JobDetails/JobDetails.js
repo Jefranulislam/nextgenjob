@@ -12,34 +12,61 @@ const JobDetails = () => {
   const { jobId } = useParams();
   const [jobs, setjobs] = useState([]);
 
+
   useEffect(() => {
-    fetch(`http://localhost:4000/jobs/${jobId}`)
+    fetch(`https://localhost:4000/jobdetails/${jobId}`)
       .then((res) => res.json())
       .then((data) => {
-        setjobs(data);
-        console.log(data);
+        if (Array.isArray(data)) {
+          setjobs(data);
+          console.log(data);
+        } else {
+          console.error("Invalid data format received");
+        }
       })
       .catch((error) => {
         console.error(error);
       });
   }, [jobId]);
+
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:4000/jobdetails/${jobId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setjobs(data);
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [jobId]);
   return (
     <React.Fragment>
       <Section />
       <section className="section">
         <Container>
-          <Row>
+        <Row>
             <Col lg={8}>
-                {jobs.map( (job) => {
-              return <h1 key={job.id}job={job} >{job.companyName}</h1>
-                })}
-              {/* <JobDetailsDescription jobId={jobId} />
-              <JobVacancyPost /> */}
+              {jobs.length > 0 ? (
+                jobs.map((job) => (
+                  <div key={job._id}>
+                    <h1>{job.companyName}</h1>
+                    {/* Render other job details here */}
+                  </div>
+                ))
+              ) : (
+                <p>Loading...</p>
+              )}
             </Col>
             <Col lg={4} className="mt-4 mt-lg-0">
               {/* <RightSideContent /> */}
             </Col>
           </Row>
+
+
+         
+          
         </Container>
       </section>
     </React.Fragment>
