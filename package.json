@@ -36,10 +36,11 @@
     "react": "^18.2.0"
   },
   "engines": {
-    "node": "18.x",
-    "npm": ">=6.0.0"
+    "node": "16.x",
+    "npm": "~1.0.20"
   },
   "scripts": {
+    "build:digitalocean": "npm install --production=false && npm run build && npm ci",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
