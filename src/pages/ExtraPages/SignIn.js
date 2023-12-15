@@ -1,57 +1,49 @@
 import React, { useState } from "react";
 import { Card, CardBody, Col, Container, Row} from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 
 import lightLogo from "../../assets/images/Nextgenjob.png";
 import darkLogo from "../../assets/images/Nextgenjob.png";
 import signInImage from "../../assets/images/auth/sign-in.png";
+import axios from "axios";
 
 const SignIn = () => {
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
-  const [signInWithGoogle, userG, loadingG, errorG] = useSignInWithGoogle(auth);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate = useNavigate();
-  const [selectedRole, setSelectedRole] = useState('hr');
+  const navigate = useNavigate();  
   
   
-  
-  
-  // Function to handle form submission
   const onSubmit = async (data) => {
-    try {
-      if (selectedRole === 'hr') {
-        // Logic for HR sign-in
-        await signInWithEmailAndPassword(data.email, data.password);
-        // Redirect to HR dashboard after successful login
-        navigate('/hr-dashboard');
-      } else {
-        // Logic for Applicant sign-in
-        await signInWithEmailAndPassword(data.email, data.password);
-        // Redirect to Applicant dashboard after successful login
-        navigate('/applicant-dashboard');
-      }
+    try { 
+      const userData = {email: data.email , password: data.password  , userRole: data.userRole }
+      console.log(userData);
+        await signInWithEmailAndPassword(auth, data.email,data.password); 
+        const  response = await axios.post("http://localhost:4000/signin",userData)
+        console.log(userData);
+        console.log(response);
     } catch (error) {
       alert("SignIn Error:", error);
+        console.log(error);
+        console.error(error);
     }
   };
 
-  
-
   // Redirect to profile if the user is signed in
-  if (user || userG) {
-    navigate('/myprofile');
-    console.log(user||userG);
+  if (user ) {
+    // navigate('/myprofile');
+    // console.log(user);
   }
 
   // Construct error message
-  const signinErrors = error || errorG || errors ? (
-    <p className='text-xs'>{error?.message || errorG?.message || errors?.message}</p>
+  const signinErrors = error || errors ? (
+    <p className='text-xs'>{error?.message || 
+       errors?.message}</p>
   ) : null;
 
-  if (loading || loadingG) {
+  if (loading ) {
     return <p>Loading...</p>;
   }
 
@@ -83,9 +75,6 @@ const SignIn = () => {
                               <h5>Welcome Back !</h5>
                               <p className="text-white-70">Sign in to continue to Nextgenjob.</p>
                             </div>
-                            <button onClick={() => signInWithGoogle()} className="btn btn-primary w-100 my-3">
-                              Sign in with Google
-                            </button>
                             <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
                               <div className="mb-3">
                                 <label htmlFor="usernameInput" className="form-label">Email</label>
@@ -98,42 +87,32 @@ const SignIn = () => {
                               
 
                               <div className="mb-4">
-          {/* Radio buttons for role selection */}
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              id="hrRole"
-              value="hr"
-              checked={selectedRole === 'hr'}
-              onChange={() => setSelectedRole('hr')}
-            />
-            <label className="form-check-label" htmlFor="hrRole">
-              HR/CEO
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              id="applicantRole"
-              value="applicant"
-              checked={selectedRole === 'applicant'}
-              onChange={() => setSelectedRole('applicant')}
-            />
-            <label className="form-check-label" htmlFor="applicantRole">
-              Applicant
-            </label>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
+                                {/* Radio buttons for role selection */}
+                                                          <div className="form-check">
+                                  <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    id="hr"
+                                    value="Hr"
+                                    {...register('userRole')}
+                                  />
+                                  <label className="form-check-label" htmlFor="hr">
+                                    HR
+                                  </label>
+                                </div>
+                                <div className="form-check">
+                                  <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    id="applicant"
+                                    value="Applicant"
+                                    {...register('userRole')}
+                                  />
+                                  <label className="form-check-label" htmlFor="applicant">
+                                    Applicant
+                                  </label>
+                                </div>
+                              </div>
 
                               <div className="mb-4">
                                 <div className="form-check">

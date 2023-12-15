@@ -14,6 +14,7 @@ const JobVacancy2 = () => {
         .then(res => res.json())
         .then(data => {
             setjobs(data);
+            console.log(data);
 
         })
         .catch(error => {

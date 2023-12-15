@@ -6,7 +6,7 @@ import RightSideContent from "./RightSideContent";
 import Section from "./Section";
 import { useParams } from "react-router-dom";
 
-const JobDetails = () => {
+  const JobDetails = () => {
   document.title = "Job Details | NextGenJob - Code Canva Team | NextGenJob";
 
   const { jobId } = useParams();
@@ -41,32 +41,23 @@ const JobDetails = () => {
   //       console.error(error);
   //     });
   // }, [jobId]);
+
+
   return (
     <React.Fragment>
       <Section />
       <section className="section">
         <Container>
-        <Row>
+      <Row>
             <Col lg={8}>
-              {jobs.length > 0 ? (
-                jobs.map((job) => (
-                  <div key={job._id}>
-                    <h1>{job.companyName}</h1>
-                    {/* Render other job details here */}
-                  </div>
-                ))
-              ) : (
-                <p>Loading...</p>
-              )}
+              <JobDetailsDescription jobId={jobId} />
+              <JobVacancyPost />
             </Col>
             <Col lg={4} className="mt-4 mt-lg-0">
-              {/* <RightSideContent /> */}
+              <RightSideContent jobId={jobId} />
             </Col>
           </Row>
 
-
-         
-          
         </Container>
       </section>
     </React.Fragment>

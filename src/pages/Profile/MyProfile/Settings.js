@@ -62,8 +62,8 @@ const Settings = () => {
                             <option value="applicant">Applicant</option>
                           </Input>
                           <div className="mb-4 profile-user pt-2">
-                        <img src={user.photoURL} className="rounded-circle img-thumbnail profile-img"  id="profile-img"  alt=""  />
-                        <h4> {user.displayName}</h4>
+                        <img src={""} className="rounded-circle img-thumbnail profile-img"  id="profile-img"  alt=""  />
+                        <h4> {user}</h4>
                         <div className="p-0 rounded-circle profile-photo-edit">
                           <input  id="profile-img-file-input"  type="file"   className="profile-img-file-input"  />
                           <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
@@ -73,8 +73,6 @@ const Settings = () => {
                       </div>
                     </div>
                     <Row>
-
-
 
                     {userRole === 'HR' && (
                               <div>

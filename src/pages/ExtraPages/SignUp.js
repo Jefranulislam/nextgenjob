@@ -4,48 +4,39 @@ import { Container, Card, Col, Row, CardBody } from "reactstrap";
 import lightLogo from "../../assets/images/Nextgenjob.png";
 import darkLogo from "../../assets/images/Nextgenjob.png";
 import signUpImage from "../../assets/images/auth/sign-up.png";
-import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
-
+import axios from "axios";
 
 const SignUp = () => {
-const [signInWithGoogle, userGoogle, userLoading, userError]= useSignInWithGoogle(auth);
-const [createUserWithEmailAndPassword, user,loading,error]= useCreateUserWithEmailAndPassword(auth);
-const { register, handleSubmit, formState: { errors }  } =  useForm ();
-const naviagate = useNavigate();
-let signinErrors;
+  const [createUserWithEmailAndPassword, user, loading, error] =useCreateUserWithEmailAndPassword(auth);
+  const {register,handleSubmit,formState: { errors },} = useForm();
+  const naviagate = useNavigate();
+  let signinErrors;
 
+  const onSubmit = async (data) => {
+    try {
+      const userdata= { email: data.email,  password : data.password,  name: data.name, role:data.role, }
+      await createUserWithEmailAndPassword(userdata);
+      const {uSdata}= await axios.post("http://localhost:4000/api/signup",{userdata})
+      console.log(uSdata);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-const onSubmit = async (data)=>{
-
-  try{
-    await createUserWithEmailAndPassword(data.email,data.password);
-    // alert("New User Signup on website");
-    naviagate('/myprofile/settings');
-
-    console.log(data);
+  if ( user) {
+    // naviagate("/myprofile/settings");
   }
-  catch (error){
-console.error(error);
-  }
-}
 
-if(userGoogle || user){
-
- naviagate('/myprofile/settings');
-
-}
-
-
-
-
-
-  
-document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
+  document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
   return (
     <React.Fragment>
-
       <div>
         <div className="main-content">
           <div className="page-content">
@@ -88,22 +79,11 @@ document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
                                   Nextgenjob
                                 </p>
                               </div>
-                              <form  onSubmit={handleSubmit(onSubmit)} className="auth-form">
-                                <div className="mb-3">
-                                  <label
-                                    htmlFor="usernameInput"
-                                    className="form-label"
-                                  >
-                                    Name
-                                  </label>
-                                  <input   
-                                   {...register("name", { required: true })} name="name" 
-                                    type="text"
-                                    className="form-control"
-                                    id="email"
-                                    placeholder="Enter your email"
-                                
-                                  />
+                              <form
+                                onSubmit={handleSubmit(onSubmit)} className="auth-form">
+                                <div className="mb-3"> 
+                                <label  htmlFor="usernameInput"  className="form-label" > Name</label>
+                                  <input {...register("name", { required: true })}name="name" type="text"  className="form-control"  id="email"  placeholder="Enter your email" />
                                 </div>
                                 <div className="mb-3">
                                   <label
@@ -112,8 +92,9 @@ document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
                                   >
                                     Email
                                   </label>
-                                  <input  
-                                  {...register("email", { required: true })} name="email" 
+                                  <input
+                                    {...register("email", { required: true })}
+                                    name="email"
                                     type="email"
                                     className="form-control"
                                     required
@@ -133,10 +114,36 @@ document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
                                     className="form-control"
                                     id="passwordInput"
                                     placeholder="Enter your password"
-                                    {...register("password", { required: true })} name="password" 
-
+                                    {...register("password", {
+                                      required: true,
+                                    })}
+                                    name="password"
                                   />
                                 </div>
+                                <Col lg={12} >
+                                <div className="mb-4 form-check" >
+                                 <div  className="form-check form-check-inline ">
+                                  <input
+                                    
+                                    {...register("role")}
+                                    type="radio"
+                                    id="hr"
+                                    value="hr"
+                                    className="form-check form-check-input"
+                                  />
+                                  <label htmlFor="hr" className="form-check-label">HR/CEO</label></div>
+                                  <div className="form-check  form-check-inline ">
+                                  <input
+                                    {...register("role")}
+                                    type="radio"
+                                    id="applicant"
+                                    value="applicant"
+                                    className="form-check form-check-input"
+                                  />
+                                  <label htmlFor="applicant" className="form-check-label">Applicant</label>
+                                  </div>
+                                </div>
+                                </Col>
                                 <div className="mb-4">
                                   <div className="form-check">
                                     <input
@@ -168,10 +175,6 @@ document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
                                 </div>
                               </form>
                               <div className="mt-3 text-center">
-                          <button onClick={() => signInWithGoogle()}  className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-100 hover:text-slate-900 hover:shadow transition duration-150">
-                              <span>Sign up with </span>  <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png" className="img-fluid w-25" alt="ae" /> 
-                    </button>
-
                                 <p className="mb-0">
                                   Already a member ?{" "}
                                   <Link

@@ -3,14 +3,18 @@ import { Card, CardBody, Col, Row } from "reactstrap";
 import { Link, useParams } from "react-router-dom";
 
 const JobDetailsDescription = ({jobId}) => {
-  const [jobs, setjobs] = useState([]);
+  const [job, setjob] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/jobs/${jobId}`)
+    fetch(`https://localhost:4000/jobdetails/${jobId}`)
       .then((res) => res.json())
       .then((data) => {
-        setjobs(data);
-        console.log(data);
+        if (Array.isArray(data)) {
+          setjob(data);
+          console.log(data);
+        } else {
+          console.error("Invalid data format received");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -18,12 +22,9 @@ const JobDetailsDescription = ({jobId}) => {
   }, [jobId]);
 
 
-
-
-  
-  return (
+return (
     <React.Fragment>
-      {jobs.map((jobDetails) => (
+      {job.map((jobDetails) => (
         <Card lg={4} md={6} className="job-detail overflow-hidden" key={jobDetails._id}>
           <h1> {jobDetails.companyName} </h1>
         <div>

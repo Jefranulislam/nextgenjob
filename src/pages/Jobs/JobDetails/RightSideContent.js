@@ -20,6 +20,7 @@ const RightSideContent = ({ jobId }) => {
         console.error(error);
       });
   }, [jobId]);
+  
   //Apply Now Model
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);

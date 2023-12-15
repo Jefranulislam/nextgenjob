@@ -25,7 +25,7 @@ const Section = () => {
 
   return (
     <React.Fragment>
-      <section className="page-title-box">
+      <section className="">
         <Container>
           <Row className="justify-content-center">
           <section className="w-100 p-3 bg-primary z-1" style={sectionStyle} >
