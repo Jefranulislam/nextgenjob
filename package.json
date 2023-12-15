@@ -23,7 +23,6 @@
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.48.2",
-    "react-image-lightbox": "^5.1.4",
     "react-masonry-component": "^6.3.0",
     "react-modern-drawer": "^1.2.0",
     "react-rangeslider": "^2.2.0",

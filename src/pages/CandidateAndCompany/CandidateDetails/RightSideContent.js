@@ -3,8 +3,6 @@ import { Col, Card, CardBody, Row, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
 //Lightbox
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
 
 //Import Blog Imgaes
 import blogImage1 from "../../../assets/images/blog/img-01.jpg";
@@ -22,24 +20,7 @@ const RightSideContent = () => {
   const [isGallery, setisGallery] = useState(false);
   return (
     <React.Fragment>
-      {isGallery ? (
-        <Lightbox
-          mainSrc={images[photoIndex]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-          enableZoom={true}
-          onCloseRequest={() => {
-            setisGallery(false);
-          }}
-          onMovePrevRequest={() => {
-            setphotoIndex((photoIndex + images.length - 1) % images.length);
-          }}
-          onMoveNextRequest={() => {
-            setphotoIndex((photoIndex + 1) % images.length);
-          }}
-          imageCaption={"Project " + parseFloat(photoIndex + 1)}
-        />
-      ) : null}
+      
       <Col lg={8}>
         <Card className="candidate-details ms-lg-4 mt-4 mt-lg-0">
           <CardBody className="p-4 candidate-personal-detail">

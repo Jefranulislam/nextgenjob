@@ -122,24 +122,6 @@ const RightSideContent = () => {
   ];
   return (
     <React.Fragment>
-      {isGallery ? (
-        <Lightbox
-          mainSrc={images[photoIndex]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-          enableZoom={true}
-          onCloseRequest={() => {
-            setisGallery(false);
-          }}
-          onMovePrevRequest={() => {
-            setphotoIndex((photoIndex + images.length - 1) % images.length);
-          }}
-          onMoveNextRequest={() => {
-            setphotoIndex((photoIndex + 1) % images.length);
-          }}
-          imageCaption={"Project " + parseFloat(photoIndex + 1)}
-        />
-      ) : null}
       <Col lg={8}>
         <Card className="ms-lg-4 mt-4 mt-lg-0">
           <CardBody className="p-4">
