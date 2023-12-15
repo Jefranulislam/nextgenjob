@@ -11,9 +11,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-//Lightbox
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
+
 
 //Import BlogImage
 import blogImage1 from "../../../assets/images/blog/img-01.jpg";
@@ -33,9 +31,7 @@ const RightSideContent = () => {
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);
 
-  //Lightbox
-  const [photoIndex, setphotoIndex] = useState(0);
-  const [isGallery, setisGallery] = useState(false);
+
 
   const jobVacancyPost = [
     {
@@ -158,8 +154,7 @@ const RightSideContent = () => {
                     <img
                       src={blogImage1}
                       onClick={() => {
-                        setisGallery(true);
-                        setphotoIndex(0);
+                    
                       }}
                       alt=""
                       className="img-fluid"
@@ -171,8 +166,7 @@ const RightSideContent = () => {
                     <img
                       src={blogImage3}
                       onClick={() => {
-                        setisGallery(true);
-                        setphotoIndex(1);
+                 ;
                       }}
                       alt=""
                       className="img-fluid"
@@ -184,8 +178,7 @@ const RightSideContent = () => {
                     <img
                       src={blogImage12}
                       onClick={() => {
-                        setisGallery(true);
-                        setphotoIndex(2);
+                    
                       }}
                       alt=""
                       className="img-fluid"

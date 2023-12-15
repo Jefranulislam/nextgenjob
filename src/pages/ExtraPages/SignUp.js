@@ -4,11 +4,7 @@ import { Container, Card, Col, Row, CardBody } from "reactstrap";
 import lightLogo from "../../assets/images/Nextgenjob.png";
 import darkLogo from "../../assets/images/Nextgenjob.png";
 import signUpImage from "../../assets/images/auth/sign-up.png";
-import {
-  useAuthState,
-  useCreateUserWithEmailAndPassword,
-  useSignInWithGoogle,
-} from "react-firebase-hooks/auth";
+import {useAuthState, useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -22,9 +18,9 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     try {
       const userdata= { email: data.email,  password : data.password,  name: data.name, role:data.role, }
-      await createUserWithEmailAndPassword(userdata);
-      const {uSdata}= await axios.post("http://localhost:4000/api/signup",{userdata})
-      console.log(uSdata);
+      await createUserWithEmailAndPassword(auth,userdata);
+      console.log(userdata);
+      
     } catch (error) {
       console.error(error);
     }
