@@ -1,16 +1,13 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { Col, Row, Container, Collapse, NavbarToggler, NavItem, Dropdown,DropdownToggle,DropdownMenu,ButtonToggle} from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Nextgenjob.png";
-import userImage2 from "../../assets/images/Nextgenjob.png";
-import jobImage4 from "../../assets/images/Nextgenjob.png";
-import userImage1 from "../../assets/images/Nextgenjob.png";
-import jobImage from "../../assets/images/Nextgenjob.png";
 import { useState } from 'react';
 import auth from '../../firebase.init';
 import withRouter from '../../components/withRouter';
+
 
 
 
@@ -19,21 +16,27 @@ const NavBar = () => {
   const toggle = () => setIsOpen(!isOpen);
   const [notification, setNotification] = useState(false);
   const dropDownnotification = () => setNotification((prevState) => !prevState);
+  const [userInfo, setUserInfo] = useState("");
 
 
 
   const navigate = useNavigate();
-  const [user]  = useAuthState(auth);
 
+  const [user, loading, error] = useAuthState(auth);
+  const [signOut] = useSignOut(auth);
   const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-     navigate("/");
-      
-    } catch (error) {
-      console.error(error);
-    }
+      try {
+          await signOut();
+          
+          if (true) {
+            localStorage.removeItem("userData");
+              alert('You are sign out');
+          }
+      }
+      catch (error) { console.error(error) }
   };
+
+  
 
   return (
     <React.Fragment>
@@ -66,11 +69,15 @@ const NavBar = () => {
                   <NavItem>
                     <Link to="/contact" className="nav-link">Contact</Link>
                   </NavItem>
+                    <NavItem>
+                    <Link to="/createajob" className="nav-link">Post a Job</Link>
+                  </NavItem>
+              
                 </ul>
               </Collapse>
             </Col>
             <Col xs={3} className="d-flex justify-content-center  ">
-              {user ? (
+              {user? (
 
                 <div className="d-flex align-items-center border m-2 border-primary-subtle border-1 rounded-5">
                         <img src={user.photoURL } alt={user.displayName} className="rounded-circle me-2" style={{ height: '40px', width: '40px' }} />
@@ -89,13 +96,11 @@ const NavBar = () => {
                 tag="a"
               >
               </DropdownToggle>
-                     {/* //*inside of notification menu*/}
               <DropdownMenu
                 className="dropdown-menu-sm dropdown-menu-end p-0"
                 aria-labelledby="notification"
                 end
               >
-               
                 <div className="notification-wrapper dropdown-scroll">
                   <Link
                     to="/myprofile"
@@ -125,19 +130,11 @@ const NavBar = () => {
                       </div>
                     </div>
                   </Link>
-                  
                   <Link className="text-dark notification-item d-block">
                   <button className="btn btn-primary " onClick={handleSignOut}>Sign out</button>
-                  
                   </Link>
                 </div>
-                
-              </DropdownMenu> 
-
-              </Dropdown> 
-
-                   
-                  
+              </DropdownMenu>  </Dropdown>  
                 </div>
               ) : (
                 <div>

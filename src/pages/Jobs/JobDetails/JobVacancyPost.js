@@ -24,7 +24,6 @@ const JobVacancyPost = () => {
 
   return (
     <React.Fragment>
-
       {jobs.map((jobVacancyPostDetails) => (
         <div
           key={jobVacancyPostDetails._id}

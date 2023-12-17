@@ -25,6 +25,9 @@ const Loader = () => {
 };
 
 const Index = () => {
+  
+
+
   return (
     <React.Fragment>
       <Suspense fallback={Loader()}>

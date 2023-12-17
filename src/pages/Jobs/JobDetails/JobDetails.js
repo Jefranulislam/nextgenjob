@@ -19,7 +19,6 @@ import { useParams } from "react-router-dom";
       .then((data) => {
         if (Array.isArray(data)) {
           setjobs(data);
-          console.log(data);
         } else {
           console.error("Invalid data format received");
         }
@@ -30,19 +29,6 @@ import { useParams } from "react-router-dom";
   }, [jobId]);
 
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:4000/jobdetails/${jobId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setjobs(data);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, [jobId]);
-
-
   return (
     <React.Fragment>
       <Section />
@@ -50,11 +36,10 @@ import { useParams } from "react-router-dom";
         <Container>
       <Row>
             <Col lg={8}>
-              <JobDetailsDescription jobId={jobId} />
-              <JobVacancyPost />
+              <JobDetailsDescription jobId={jobId} jobs={jobs} />
             </Col>
             <Col lg={4} className="mt-4 mt-lg-0">
-              <RightSideContent jobId={jobId} />
+              <RightSideContent jobId={jobId} jobs = {jobs} />
             </Col>
           </Row>
 

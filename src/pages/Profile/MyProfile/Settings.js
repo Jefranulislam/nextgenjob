@@ -1,80 +1,105 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Input,Label} from "reactstrap";
-
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { useForm } from "react-hook-form"
+import { Navigate, useLocation } from "react-router-dom";
 
 const Settings = () => {
+  const location = useLocation();
+  const [userInfo, setUserInfo] = useState("null");
+   const user= useAuthState(auth);
+   const { email, userRole } = location.state || {};
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [selectedImage, setSelectedImage] = useState(null);
+     const apiKey = 'Y7abdd5b63ddc4d2cc4f3919d84a110cc'; 
+
+
+  useEffect(() => {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      setUserInfo(userData);
+    }
+  }, []);
+
 
   
-  const [userRole, setUserRole] = useState(''); 
-  const handleRoleChange = (e) => {
-  setUserRole(e.target.value); 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);   
+    uploadImageToImgbb(file);
+
+  };
+  const uploadImageToImgbb = async (imageFile) => {
+    const apiUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${apiKey}`;
    
+
+    const formData = new FormData();
+    formData.append('key', apiKey);
+    formData.append('image', imageFile);
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        return data.data.display_url; 
+      } else {
+        throw new Error('Failed to upload image');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
   };
 
-      //Add to the auth
-   const [user]= useAuthState(auth);
-
-
-        //Handling the submission with Use Form()
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-
-
-    const onSubmitHR = async (data, e) => {
+  const onSubmitHR = async (data, e) => {
       e.preventDefault();
       const {userRole, firstName, lastName, companyName, position, orgAddress, orgPhoneNumber, webAddress } = data;
-      // Process HR data
-      console.log('HR Data:', data);
-    };
     
+    };
     const onSubmitApplicant = async (data, e) => {
       e.preventDefault();
       const {userRole, firstName, lastName, experience, educationBackground, skills, toolsExperience, address, phoneNumber, email } = data;
-      // Process Applicant data
-      console.log('Applicant Data:', data);
     };
 
-    
-
   const onSubmit = async (data,e)=>{
-    if (userRole === 'HR') {
-      onSubmitHR(data, e);
-    } else if (userRole === 'applicant') {
-      onSubmitApplicant(data, e);
-    } else {
+    if (user && user[0]) {
+      const currentUser = user[0]; // Ensure user object exists
+      if (currentUser.role === 'hr') {
+        await onSubmitHR(data, e);
+      } else if (currentUser.role === 'applicant') {
+        await onSubmitApplicant(data, e);
+      } else {
+      }
     }
+    
   };
 
 
     return (
         <div className="w-50 mx-auto mt-5 pt-5 pb-5">
-              <form  onSubmit={handleSubmit(onSubmit)} className="bg-light" >
-                  <div>
+          <h1>Welcome, {userInfo.role}</h1>
+                    <div>
                     <h5 className="fs-17 fw-semibold mb-3 mb-0">My Account</h5>
                     <div className="text-center">
-                      <Label for="userRole">Account Type</Label>
-                          <Input  {...register("userRole")} type="select" name="userRole" id="userRole"   onChange={(e) => handleRoleChange(e)} value={userRole} className="input bg-purple text-white"  >
-                            <option value="">Select Role</option>
-                            <option value="HR">HR</option>
-                            <option value="applicant">Applicant</option>
-                          </Input>
                           <div className="mb-4 profile-user pt-2">
                         <img src={""} className="rounded-circle img-thumbnail profile-img"  id="profile-img"  alt=""  />
-                        <h4> {user}</h4>
                         <div className="p-0 rounded-circle profile-photo-edit">
-                          <input  id="profile-img-file-input"  type="file"   className="profile-img-file-input"  />
-                          <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
+                        <input type="file"onChange={handleImageChange}id="profile-img-file-input" className="profile-img-file-input"/>                          <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
                             <i className="uil uil-edit"></i>
                           </label>
                         </div>
                       </div>
                     </div>
                     <Row>
+   { userInfo.role === 'hr' && (
+                  <form  onSubmit={handleSubmit(onSubmit)} className="bg-light" >
 
-                    {userRole === 'HR' && (
                               <div>
                                   <Row>
                                    <Col lg={6}>
@@ -160,10 +185,20 @@ const Settings = () => {
                               </div>
                            
                            
+                  <div className="mt-4 text-end">
+                    <input type="submit" to="" className="btn btn-primary"/>
+                 
+                  </div>
+                           
+                           </form>
+                           
                            )}
 
 
-                            {userRole === 'applicant' && (
+{userInfo.role === 'applicant' && (
+
+<form  onSubmit={handleSubmit(onSubmit)} className="bg-light" >
+
                               <div>
                                 
                                   <Row>
@@ -292,21 +327,19 @@ const Settings = () => {
                     </Row>
                   </div>       
                               </div>
-                            )}
-
-
-
-
-
-                    </Row>
-                  </div>
-
-
+                              
                   <div className="mt-4 text-end">
                     <input type="submit" to="" className="btn btn-primary"/>
                  
                   </div>
-                </form>
+                              </form>
+                            )}
+
+        
+                    </Row>
+                  </div>
+
+
         </div>
     );
 };

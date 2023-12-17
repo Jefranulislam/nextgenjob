@@ -5,15 +5,15 @@ import { Link, useParams } from "react-router-dom";
 //Import Images
 import jobImages2 from "../../../assets/images/featured-job/img-02.png";
 
-const RightSideContent = ({ jobId }) => {
-  const [jobs, setjobs] = useState([]);
+const RightSideContent = ({ jobId , jobs }) => {
+  const [job, setjob] = useState(null);
   // const {jobId} = useParams();
 
   useEffect(() => {
     fetch(`http://localhost:4000/jobs/${jobId}`)
       .then((res) => res.json())
       .then((data) => {
-        setjobs(data);
+        setjob(data);
         console.log(data);
       })
       .catch((error) => {

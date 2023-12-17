@@ -4,11 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
-
 import lightLogo from "../../assets/images/Nextgenjob.png";
 import darkLogo from "../../assets/images/Nextgenjob.png";
 import signInImage from "../../assets/images/auth/sign-in.png";
-import axios from "axios";
 
 const SignIn = () => {
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
@@ -20,10 +18,18 @@ const SignIn = () => {
     try { 
       const userData = {email: data.email , password: data.password  , userRole: data.userRole }
       console.log(userData);
+      localStorage.setItem("userData", JSON.stringify(userData));
         await signInWithEmailAndPassword(auth, data.email,data.password); 
-        const  response = await axios.post("http://localhost:4000/signin",userData)
-        console.log(userData);
+        const response = await fetch("http://localhost:4000/signin/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userData }),
+        });
         console.log(response);
+        console.log(userData);
+
     } catch (error) {
       alert("SignIn Error:", error);
         console.log(error);
@@ -31,10 +37,8 @@ const SignIn = () => {
     }
   };
 
-  // Redirect to profile if the user is signed in
   if (user ) {
-    // navigate('/myprofile');
-    // console.log(user);
+    navigate('myprofile/settings', { state: { email: user.email, userRole: user.userRole } })
   }
 
   // Construct error message

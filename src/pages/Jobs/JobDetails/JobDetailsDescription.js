@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardBody, Col, Row } from "reactstrap";
 import { Link, useParams } from "react-router-dom";
 
-const JobDetailsDescription = ({jobId}) => {
+const JobDetailsDescription = ({jobId,jobs})=> {
   const [job, setjob] = useState(null);
 
   useEffect(() => {
@@ -11,7 +11,6 @@ const JobDetailsDescription = ({jobId}) => {
       .then((data) => {
         if (Array.isArray(data)) {
           setjob(data);
-          console.log(data);
         } else {
           console.error("Invalid data format received");
         }
@@ -19,14 +18,14 @@ const JobDetailsDescription = ({jobId}) => {
       .catch((error) => {
         console.error(error);
       });
-  }, [jobId]);
+  },[jobId]);
 
 
 return (
     <React.Fragment>
-      {job.map((jobDetails) => (
+      {jobs.map(({ jobDetails, key }) => (
         <Card lg={4} md={6} className="job-detail overflow-hidden" key={jobDetails._id}>
-          <h1> {jobDetails.companyName} </h1>
+          <h1> {jobDetails.jobDescription} </h1>
         <div>
           <img src={jobDetails.companyImg} alt="" className="img-fluid" />
           <div className="job-details-compnay-profile">
@@ -236,7 +235,7 @@ return (
           </div>
         </CardBody>
       </Card>
-      ))};
+      ))}
     </React.Fragment>
   );
 };

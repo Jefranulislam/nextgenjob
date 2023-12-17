@@ -41,6 +41,7 @@ import BookMarkJobs from "../pages/Profile/BookMarkJobs/BookMarkJobs";
 import MyProfile from "../pages/Profile/MyProfile/MyProfile";
 import Settings from "../pages/Profile/MyProfile/Settings";
 import Jobs from "../pages/Jobs/JobGrid2/Jobs";
+import CreateAJob from "../pages/Jobs/JobDetails/createAJob";
 
 //Home Section
 const Layout2 = React.lazy(() => import("../pages/Home/Layout2/Layout2"));
@@ -71,6 +72,7 @@ const userRoutes = [
   { path: "/jobdetails/:jobId", component: <JobDetails /> },
   { path: "/Jobs", component: <Jobs/> },
   { path: "/joblist2", component: <JobList2 /> },
+  { path: "/createajob", component: <CreateAJob /> },
 
   //Company Section
   { path: "/privacyandpolicy", component: <PrivacyAndPolicy /> },
