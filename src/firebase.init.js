@@ -11,8 +11,8 @@ const firebaseConfig = {
   projectId: "nextgenjob-codecanva",
   storageBucket: "nextgenjob-codecanva.appspot.com",
   messagingSenderId: "148665060434",
-  appId: "1:148665060434:web:607fba41f33cb46fda638b",
-  measurementId: "G-QV3NVL6MJK"
+  appId: "1:148665060434:web:b80990c36cbc806ada638b",
+  measurementId: "G-F5Q25HWBZ5"
 };
 
 // Initialize Firebase

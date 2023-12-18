@@ -19,7 +19,6 @@ const NavBar = () => {
   const [userInfo, setUserInfo] = useState("");
 
 
-
   const navigate = useNavigate();
 
   const [user, loading, error] = useAuthState(auth);
@@ -36,7 +35,13 @@ const NavBar = () => {
       catch (error) { console.error(error) }
   };
 
-  
+  useEffect(() => {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const parsedData  = JSON.parse(userDataString);
+      setUserInfo(parsedData );
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -77,11 +82,11 @@ const NavBar = () => {
               </Collapse>
             </Col>
             <Col xs={3} className="d-flex justify-content-center  ">
-              {user? (
+              {userInfo?  (
 
                 <div className="d-flex align-items-center border m-2 border-primary-subtle border-1 rounded-5">
-                        <img src={user.photoURL } alt={user.displayName} className="rounded-circle me-2" style={{ height: '40px', width: '40px' }} />
-                    <div className="me-3">{user.displayName || user.email}
+                        <img src={"user.photoURL "} alt={userInfo.displayName} className="rounded-circle me-2" style={{ height: '40px', width: '40px' }} />
+                    <div className="me-3">{userInfo.displayName || userInfo.email}
                     </div> 
             <Dropdown
               isOpen={notification}

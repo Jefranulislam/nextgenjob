@@ -16,10 +16,9 @@ const SignIn = () => {
   
   const onSubmit = async (data) => {
     try { 
-      const userData = {email: data.email , password: data.password  , userRole: data.userRole }
+      const userData = {email: data.email , password: data.password  , userRole: data.userRole };
       console.log(userData);
-      localStorage.setItem("userData", JSON.stringify(userData));
-        await signInWithEmailAndPassword(auth, data.email,data.password); 
+        await signInWithEmailAndPassword( data.email,data.password); 
         const response = await fetch("http://localhost:4000/signin/", {
           method: "POST",
           headers: {
@@ -29,6 +28,7 @@ const SignIn = () => {
         });
         console.log(response);
         console.log(userData);
+        localStorage.setItem("userData", JSON.stringify(userData));
 
     } catch (error) {
       alert("SignIn Error:", error);
@@ -38,7 +38,7 @@ const SignIn = () => {
   };
 
   if (user ) {
-    navigate('myprofile/settings', { state: { email: user.email, userRole: user.userRole } })
+    navigate('/myprofile/settings', { state: { email: user.email, userRole: user.userRole } })
   }
 
   // Construct error message
@@ -121,7 +121,7 @@ const SignIn = () => {
                               <div className="mb-4">
                                 <div className="form-check">
                                   <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                                  <Link to="/resetpassword" className="float-end text-white">Forgot Password?</Link>
+                        
                                   <label className="form-check-label" htmlFor="flexCheckDefault">Remember me</label>
                                 </div>
                               </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row } from "reactstrap";
 import JobVacancy2 from "./JobVacancy2";
 import Section from "./Section";
-import Pagination from "../JobList2/Pagination";
 
 const Jobs = () => {
   document.title = "Job Grid2 | NextGenJob - Code Canva Team | NextGenJob";
@@ -14,7 +13,6 @@ const Jobs = () => {
           <Row>
             <JobVacancy2 />
           </Row>
-          <Pagination />
         </Container>
       </section>
     </React.Fragment>

@@ -4,48 +4,47 @@ import { Container, Card, Col, Row, CardBody } from "reactstrap";
 import lightLogo from "../../assets/images/Nextgenjob.png";
 import darkLogo from "../../assets/images/Nextgenjob.png";
 import signUpImage from "../../assets/images/auth/sign-up.png";
-import {useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth";
+import {useCreateUserWithEmailAndPassword, useSignInWithGoogle} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import useToken from "./useToken";
+import { Toast } from "react-bootstrap";
 
 const SignUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
   const {register,handleSubmit,formState: { errors },} = useForm();
   const navigate = useNavigate();
-  // const [token] = useToken(user);
-    
 
 const onSubmit = async data => {
-   
+
     try {
-      
-      const userData= { email: data.email,  password : data.password, name: data.name, role : data.role }
-      localStorage.setItem("userData", JSON.stringify(userData));
-       createUserWithEmailAndPassword(data.email,data.password);
-       const response = await fetch("http://localhost:4000/api/signup", {
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json',
-        },
-        body:JSON.stringify({
-          email: data.email,
-          password : data.password, 
-          name: data.name, 
-          role : data.role ,
-        }),
-      })
-      navigate('/myprofile/settings',{ state: { email: user.email, userRole: user.userRole } });
-      console.log(response)
+      const userData= { email: data.email,  password : data.password, name: data.name, role : data.role };
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      console.log("sucess");
+
+    if(user){
+    navigate("/jobs");
+    
+    }
+
+    const response = await fetch("http://localhost:4000/api/signup", {
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify({
+              email: data.email,
+              password : data.password, 
+              name: data.name, 
+              role : data.role ,
+      }),
+    })
+    localStorage.setItem("userData", JSON.stringify(userData));
+    navigate('/myprofile/settings');
     } catch (error) {
       console.error(error);
     }
   };
 
-
-
-  document.title = "Sign Up | Next Gen Job - Job Listing  | Team Canva";
   return (
     <React.Fragment>
       <div>

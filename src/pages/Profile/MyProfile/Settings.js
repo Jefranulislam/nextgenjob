@@ -6,9 +6,9 @@ import { useForm } from "react-hook-form"
 import { Navigate, useLocation } from "react-router-dom";
 
 const Settings = () => {
+  const user = useAuthState(auth);
   const location = useLocation();
   const [userInfo, setUserInfo] = useState("null");
-   const user= useAuthState(auth);
    const { email, userRole } = location.state || {};
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -24,47 +24,57 @@ const Settings = () => {
   }, []);
 
 
-  
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);   
-    uploadImageToImgbb(file);
 
-  };
-  const uploadImageToImgbb = async (imageFile) => {
-    const apiUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${apiKey}`;
-   
-
-    const formData = new FormData();
-    formData.append('key', apiKey);
-    formData.append('image', imageFile);
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        body: formData
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        return data.data.display_url; 
-      } else {
-        throw new Error('Failed to upload image');
-      }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      return null;
-    }
-  };
 
   const onSubmitHR = async (data, e) => {
       e.preventDefault();
       const {userRole, firstName, lastName, companyName, position, orgAddress, orgPhoneNumber, webAddress } = data;
+
+      try {
+        const response = await fetch(`http://localhost:4000/signin/${user.email}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data,
+          }),
+        });
+  
+        if (response.ok) {
+        } else {
+          console.error("Update failed");
+        }
+      } catch (error) {
+        console.error("Update failed", error);
+      }
     
     };
     const onSubmitApplicant = async (data, e) => {
       e.preventDefault();
       const {userRole, firstName, lastName, experience, educationBackground, skills, toolsExperience, address, phoneNumber, email } = data;
+    
+      try {
+        const response = await fetch(`http://localhost:4000/signin/${user.email}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data
+          }),
+        });
+  
+        if (response.ok) {
+        } else {
+          console.error("Update failed");
+        }
+      } catch (error) {
+        console.error("Update failed", error);
+      }
+    
+    
+    
     };
 
   const onSubmit = async (data,e)=>{
@@ -90,7 +100,7 @@ const Settings = () => {
                           <div className="mb-4 profile-user pt-2">
                         <img src={""} className="rounded-circle img-thumbnail profile-img"  id="profile-img"  alt=""  />
                         <div className="p-0 rounded-circle profile-photo-edit">
-                        <input type="file"onChange={handleImageChange}id="profile-img-file-input" className="profile-img-file-input"/>                          <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
+                        <input type="file"onChange={""}id="profile-img-file-input" className="profile-img-file-input"/>                          <label  htmlFor="profile-img-file-input"  className="profile-photo-edit avatar-xs" >
                             <i className="uil uil-edit"></i>
                           </label>
                         </div>
@@ -186,7 +196,7 @@ const Settings = () => {
                            
                            
                   <div className="mt-4 text-end">
-                    <input type="submit" to="" className="btn btn-primary"/>
+                    <input type="submit" onSubmit={()=>onSubmitHR} to="" className="btn btn-primary"/>
                  
                   </div>
                            

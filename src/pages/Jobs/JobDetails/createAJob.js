@@ -1,32 +1,64 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Col, Container, Input, Label, Row } from "reactstrap";
+import { Col, Container, Label, Row } from "reactstrap";
 import { useForm } from "react-hook-form";
 
 const CreateAJob = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    const jobData= { 
+    const jobData = {
+      jobtitle: data.jobtitle,
+      jobdescription: data.jobdescription,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      categories: data.categories,
+      jobtype: data.jobtype,
+      designation: data.designation,
+      salary: data.salary,
+      additionalQualifications: data.qualification,
+      positionSkills: data.skills,
+      officeAddress: data.officeAddress,
+      hrName: data.hrName,
+      HrEmailAddress: data.HrEmailAddress,
+      jobRequirements: data.jobRequirements,
+      educationBackground: data.educationBackground,
+      companyName: data.companyName,
+      CompanyImg: data.CompanyImg,
+    };
 
-
-     }
-    // localStorage.setItem("userData", JSON.stringify(userData));
-     const response = await fetch("http://localhost:4000/jobs", {
+    const response = await fetch("http://localhost:4000/jobs", {
       method: 'POST',
-      headers:{
+      headers: {
         'Content-Type': 'application/json',
       },
-      body:JSON.stringify({
+      body: JSON.stringify(
+{
+  jobtitle: data.jobtitle,
+      jobdescription: data.jobdescription,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      categories: data.categories,
+      jobtype: data.jobtype,
+      designation: data.designation,
+      salary: data.salary,
+      additionalQualifications: data.qualification,
+      positionSkills: data.skills,
+      officeAddress: data.officeAddress,
+      hrName: data.hrName,
+      HrEmailAddress: data.HrEmailAddress,
+      jobRequirements: data.jobRequirements,
+      educationBackground: data.educationBackground,
+      companyName: data.companyName,
+      CompanyImg: data.CompanyImg,
+}
+
         
-
-
-      }),
-    })
-
-
-
-
+      ),
+      
+    });
+    console.log(response);
+    localStorage.setItem("jobData", JSON.stringify(jobData));
     console.log(data);
   };
 
@@ -47,20 +79,84 @@ const CreateAJob = () => {
           >
             <div className="job-post-content box-shadow-md rounded-3 p-4">
               <Row className="row">
-                <Col lg={12}>
+                <Col lg={10}>
                   <div className="mb-4">
                     <Label htmlFor="jobtitle" className="form-label">
                       Job Title
                     </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
                       id="jobtitle"
                       placeholder="Title"
+                      name="jobtitle"
                       {...register("jobtitle")}
                     />
                   </div>
                 </Col>
+                <Col lg={2}>
+                  <div className="mb-4">
+                    <Label htmlFor="CompanyImg" className="form-label">
+                      Company Logo
+                    </Label>
+                    <input
+                      type="link"
+                      className="form-control"
+                      id="jobtitle"
+                      placeholder="Upload on imgBB then paste the full link "
+                      name="CompanyImg"
+                      {...register("CompanyImg")}
+                    />
+                  </div>
+                </Col>
+                
+                <Col lg={4}>
+                  <div className="mb-4">
+                    <Label htmlFor="email" className="form-label">
+                      Company Name
+                    </Label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="text"
+                      placeholder="  Company Name"
+                      name="companyName"
+                      {...register("companyName")}
+                    />
+                  </div>
+                </Col>
+                <Col lg={4}>
+                  <div className="mb-4">
+                    <Label htmlFor="phoneNumber" className="form-label">
+                    Job Requirements
+                    </Label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="phoneNumber"
+                      placeholder="Job Requirements"
+                      name="jobRequirements"
+                      {...register("jobRequirements")}
+                    />
+                  </div>
+                </Col>
+                <Col lg={4}>
+                  <div className="mb-4">
+                    <Label htmlFor="phoneNumber" className="form-label">
+                    Education Background
+                    </Label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="phoneNumber"
+                      placeholder=" Education Background"
+                      name="educationBackground"
+                      {...register("educationBackground")}
+                    />
+                  </div>
+                </Col>
+
+            
                 <Col lg={12}>
                   <div className="mb-4">
                     <Label htmlFor="jobdescription" className="form-label">
@@ -70,8 +166,25 @@ const CreateAJob = () => {
                       className="form-control"
                       id="jobdescription"
                       rows="3"
+          
                       placeholder="Enter Job Description"
+                      name="jobdescription"
                       {...register("jobdescription")}
+                    ></textarea>
+                  </div>
+                </Col>
+                <Col lg={12}>
+                  <div className="mb-4">
+                    <Label htmlFor="positionResponsibilities" className="form-label">
+                    Position Responsibilities
+                    </Label>
+                    <textarea
+                      className="form-control"
+                      id="jobdescription"
+                      rows="3"
+                      placeholder="Enter Job Description"
+                      name="positionResponsibilities"
+                      {...register("positionResponsibilities")}
                     ></textarea>
                   </div>
                 </Col>
@@ -80,11 +193,12 @@ const CreateAJob = () => {
                     <Label htmlFor="email" className="form-label">
                       Email Address
                     </Label>
-                    <Input
+                    <input
                       type="email"
                       className="form-control"
                       id="email"
                       placeholder="Email Address"
+                      name="email"
                       {...register("email")}
                     />
                   </div>
@@ -94,11 +208,12 @@ const CreateAJob = () => {
                     <Label htmlFor="phoneNumber" className="form-label">
                       Phone Number
                     </Label>
-                    <Input
+                    <input
                       type="number"
                       className="form-control"
                       id="phoneNumber"
                       placeholder="Phone Number"
+                      name="phoneNumber"
                       {...register("phoneNumber")}
                     />
                   </div>
@@ -114,9 +229,9 @@ const CreateAJob = () => {
                     <select
                       className="form-select"
                       data-trigger=""
-                      name="choices-single-categories"
                       id="choices-single-categories"
                       aria-label="Default select example"
+                      name="categories"
                       {...register("categories")}
                     >
                       <option value="ne">Digital & Creative</option>
@@ -131,11 +246,12 @@ const CreateAJob = () => {
                     <Label htmlFor="jobtype" className="form-label">
                       Job Type
                     </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
                       id="jobtype"
                       placeholder="Job type"
+                      name="jobtype"
                       {...register("jobtype")}
                     />
                   </div>
@@ -145,11 +261,12 @@ const CreateAJob = () => {
                     <Label htmlFor="designation" className="form-label">
                       Designation
                     </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
                       id="designation"
                       placeholder="Designation"
+                      name="designation"
                       {...register("designation")}
                     />
                   </div>
@@ -159,11 +276,12 @@ const CreateAJob = () => {
                     <Label htmlFor="salary" className="form-label">
                       Salary($)
                     </Label>
-                    <Input
+                    <input
                       type="number"
                       className="form-control"
                       id="salary"
                       placeholder="Salary"
+                      name="salary"
                       {...register("salary")}
                     />
                   </div>
@@ -173,11 +291,12 @@ const CreateAJob = () => {
                     <Label htmlFor="qualification" className="form-label">
                       Qualification
                     </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
                       id="qualification"
                       placeholder="Qualification"
+                      name="qualification"
                       {...register("qualification")}
                     />
                   </div>
@@ -187,79 +306,66 @@ const CreateAJob = () => {
                     <Label htmlFor="skills" className="form-label">
                       Job Skills{" "}
                     </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
                       id="skills"
                       placeholder="Job skills"
+                      name="skills"
                       {...register("skills")}
                     />
                   </div>
                 </Col>
                 <Col lg={12}>
                   <div className="mb-4">
-                    <Label htmlFor="lastdate" className="form-label">
-                      Application Deadline Date
+                    <Label htmlFor="skills" className="form-label">
+                    Office Address{" "}
                     </Label>
-                    <Input
-                      type="date"
+                    <input
+                      type="text"
                       className="form-control"
-                      id="lastdate"
-                      {...register("lastdate")}
+                      id="skills"
+                      placeholder="Office Address"
+                      name="officeAddress"
+                      {...register("officeAddress")}
                     />
                   </div>
                 </Col>
+                <h5>Information of HR/CEO</h5>
                 <Col lg={6}>
                   <div className="mb-4">
-                    <Label
-                      htmlFor="choices-single-location"
-                      className="form-label"
-                    >
-                      Country
+                    <Label htmlFor="skills" className="form-label">
+                   hrName{" "}
                     </Label>
-                    <select
-                      className="form-select"
-                      data-trigger
-                      name="choices-single-location"
-                      id="choices-single-location"
-                      aria-label="Default select example"
-                      {...register("country")}
-                    >
-                      <option value="ME">Montenegro</option>
-                      <option value="MS">Montserrat</option>
-                      <option value="MA">Morocco</option>
-                      <option value="MZ">Mozambique</option>
-                    </select>
-                  </div>
-                </Col>
-                <Col lg={3}>
-                  <div className="mb-4">
-                    <Label htmlFor="city" className="form-label">
-                      City
-                    </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
-                      id="city"
-                      placeholder="City"
-                      {...register("city")}
+                      id="skills"
+                      placeholder="hr Name"
+                      name="hrName"
+                      {...register("hrName")}
                     />
                   </div>
                 </Col>
-                <Col lg={3}>
+             
+                <Col lg={6}>
                   <div className="mb-4">
-                    <Label htmlFor="zipcode" className="form-label">
-                      Zipcode
+                    <Label htmlFor="skills" className="form-label">
+                   Hr's Email Address{" "}
                     </Label>
-                    <Input
+                    <input
                       type="text"
                       className="form-control"
-                      id="zipcode"
-                      placeholder="Zipcode"
-                      {...register("zipcode")}
+                      id="skills"
+                      placeholder="Hr's Email Address"
+                      name="HrEmailAddress"
+                      {...register("HrEmailAddress")}
                     />
                   </div>
                 </Col>
+             
+            
+                
                 <Col lg={12}>
                   <div className="d-flex flex-wrap align-items-start gap-1 justify-content-end">
                     <Link to="#" className="btn btn-success">
@@ -280,3 +386,4 @@ const CreateAJob = () => {
 };
 
 export default CreateAJob;
+
