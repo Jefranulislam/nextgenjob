@@ -22,12 +22,12 @@ const TeamPage = () => {
     {
       id: 3,
       teamMemberName: "Shivaditya Das",
-      teamMemberPosition: "221003012"
+      teamMemberPosition: "Json Format, 221003012"
     },
     {
       id: 4,
       teamMemberName: "Md Riyad",
-      teamMemberPosition: "22100012"
+      teamMemberPosition: "API management, 22100012"
     },
    
   ];

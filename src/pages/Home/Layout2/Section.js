@@ -56,7 +56,7 @@ const section = () => {
                     <Col md={4}>
                       <div className="mt-3 mt-md-0 h-100">
                         <button
-                          className="btn btn-primary submit-btn w-100 h-100"
+                          className="btn btn-primary  submit-btn w-100 h-100"
                           type="submit" naviagate="/joblist2"
                         >
                           <i className="uil uil-search me-1"></i> Find Job
