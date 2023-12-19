@@ -6,6 +6,7 @@ import Section from "./Section";
 import { Link, useParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { useForm } from "react-hook-form";
 
   const JobDetails = () => {
   document.title = "Job Details | NextGenJob - Code Canva Team | NextGenJob";
@@ -15,22 +16,20 @@ const [user]= useAuthState(auth);
   const [jobinfo, setjobinfo] = useState([]);
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [applications, setApplications] = useState([]);
+  const [applicationData, setapplicationData] = useState([]);
 
 
 
-  const [applicationData, setApplicationData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setApplicationData({ ...applicationData, [name]: value });
+  const onSubmit = (data) => {
+    const updatedApplications = [...applications, data];
+    setApplications(updatedApplications);
+    console.log('Applications:', updatedApplications);
+    handleSubmitApplication(jobId);
   };
-
- 
   
+
   
   const handleSubmitApplication = (jobId) => {
     fetch(`http://localhost:4000/jobs/${jobId}`, {
@@ -39,7 +38,7 @@ const [user]= useAuthState(auth);
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        applicationData
+        applications , applicationData
       })
     })
       .then((response) => {
@@ -51,10 +50,11 @@ const [user]= useAuthState(auth);
       .then((data) => {
         console.log("Application submitted successfully", data);
         setModal(false);
-        setApplicationData({
-          name: "",
-          email: "",
-          message: ""
+        setApplications({
+          data
+        });
+        setapplicationData({
+
         });
       })
       .catch((error) => {
@@ -418,6 +418,66 @@ const [user]= useAuthState(auth);
             <div className="modal-dialog modal-dialog-centered">
               <Modal isOpen={modal} toggle={openModal} centered>
                 <ModalBody className="modal-body p-5">
+                <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="text-center mb-4">
+        <h5 className="modal-title" id="staticBackdropLabel">
+          Apply For This Job
+        </h5>
+      </div>
+      <div className="position-absolute end-0 top-0 p-3">
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="nameControlinput" className="form-label">
+          Name
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="nameControlinput"
+          placeholder="Enter your name"
+          {...register('name', { required: true })}
+        />
+        {errors.name && <span>This field is required</span>}
+      </div>
+      <div className="mb-3">
+        <label htmlFor="emailControlinput2" className="form-label">
+          Email Address
+        </label>
+        <input
+          type="email"
+          className="form-control"
+          id="emailControlinput2"
+          placeholder="Enter your email"
+          {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+        />
+        {errors.email && <span>This field is required and must be a valid email</span>}
+      </div>
+      <div className="mb-3">
+        <label htmlFor="messageControlTextarea" className="form-label">
+          Message
+        </label>
+        <textarea
+          className="form-control"
+          id="messageControlTextarea"
+          rows="4"
+          placeholder="Enter your message"
+          {...register('message', { required: true })}
+        ></textarea>
+        {errors.message && <span>This field is required</span>}
+      </div>
+
+      <button type="submit" className="btn btn-primary w-100">
+        Send Application
+      </button>
+    </form>
+
+                  {/* <form>
                   <div className="text-center mb-4">
                     <h5 className="modal-title" id="staticBackdropLabel">
                       Apply For This Job
@@ -442,8 +502,7 @@ const [user]= useAuthState(auth);
                       id="nameControlinput"
                       placeholder="Enter your name"
                       value={applicationData.name} 
-                      onChange={handleInputChange}
-                    />
+                      onChange={(e) => handleInputChange(e, 'name')}                    />
                   </div>
                   <div className="mb-3">
                     <Label for="emailControlinput2" className="form-label">
@@ -455,8 +514,7 @@ const [user]= useAuthState(auth);
                       id="emailControlinput2"
                       placeholder="Enter your email"
                       value={applicationData.email} 
-                      onChange={handleInputChange}
-                    />
+                      onChange={(e) => handleInputChange(e, 'email')}                    />
                   </div>
                   <div className="mb-3">
                     <Label for="messageControlTextarea" className="form-label">
@@ -468,15 +526,16 @@ const [user]= useAuthState(auth);
                       rows="4"
                       placeholder="Enter your message"
                       value={applicationData.message} 
-                      onChange={handleInputChange}
-                    ></textarea>
+                      onChange={(e) => handleInputChange(e, 'message')}                 ></textarea>
                   </div>
                   
                   <button type="submit" className="btn btn-primary w-100" onClick={() => handleSubmitApplication(jobId)}
 >
                     Send Application
                   </button>
+                  </form>  */}
                 </ModalBody>
+                
               </Modal>
             </div>
           </div>

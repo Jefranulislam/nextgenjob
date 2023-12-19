@@ -2,13 +2,19 @@ import React from "react";
 import { Container, Row } from "reactstrap";
 import LeftSideContent from "./LeftSideContent";
 import RightSideContent from "./RightSideContent";
-import Section from "./Section";
-import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import heroimage from "../../../assets/images/hero.png"
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const MyProfile = () => {
-  const [user]  = useAuthState(auth);
+
+  const [user, loading, error] = useAuthState(auth);
+ 
+  const retrievedUserData = localStorage.getItem("userData");
+  const parsedUserData = typeof retrievedUserData === 'string' ? JSON.parse(retrievedUserData) : retrievedUserData;
+
+
+
   document.title = "Dashboard | NextGenJob - Code Canva Team | NextGenJob";
   return (
     <React.Fragment>
@@ -18,7 +24,7 @@ const MyProfile = () => {
           <Row className="justify-content-center">
             <div md={6} className="col-md-6">
               <div className="text-center text-white">
-                <h3 className="mb-4"> Welcome {user.displayName} !</h3>
+                <h3 className="mb-4"> Welcome {parsedUserData.name} !</h3>
                 <div className="page-next">
                 </div>
               </div>

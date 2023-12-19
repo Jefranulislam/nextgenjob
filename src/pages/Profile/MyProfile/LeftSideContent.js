@@ -20,12 +20,12 @@ const LeftSideContent = () => {
           <CardBody className="p-4">
             <div className="text-center pb-4 border-bottom">
               <img
-                src={user.photoURL}
+                src={user}
                 alt=""
                 className="avatar-lg img-thumbnail rounded-circle mb-4"
               />
-              <h5 className="mb-0">{user.displayName} </h5>
-              <p className="text-muted">{user.email}</p>
+              <h5 className="mb-0">{""} </h5>
+              <p className="text-muted">{user}</p>
               <ul className="list-inline d-flex justify-content-center align-items-center ">
                 <li className="list-inline-item text-warning fs-19">
                   <i className="mdi mdi-star"></i>

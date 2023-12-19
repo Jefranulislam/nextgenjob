@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-undef */
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
-import { Col, Row, Container, Collapse, NavbarToggler, NavItem, Dropdown,DropdownToggle,DropdownMenu,ButtonToggle} from "reactstrap";
+import { Col, Row, Container, Collapse, NavbarToggler,
+   NavItem, Dropdown,DropdownToggle,DropdownMenu} from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Nextgenjob.png";
-import { useState } from 'react';
 import auth from '../../firebase.init';
 import withRouter from '../../components/withRouter';
 
@@ -18,10 +18,10 @@ const NavBar = () => {
   const dropDownnotification = () => setNotification((prevState) => !prevState);
   const [userInfo, setUserInfo] = useState("");
 
+  const [user, loading, error] = useAuthState(auth);
 
   const navigate = useNavigate();
 
-  const [user, loading, error] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
   const handleSignOut = async () => {
       try {
@@ -29,7 +29,7 @@ const NavBar = () => {
           
           if (true) {
             localStorage.removeItem("userData");
-              alert('You are sign out');
+            <p className=' alert '>Your are signing Out</p>
           }
       }
       catch (error) { console.error(error) }

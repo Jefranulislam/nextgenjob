@@ -50,7 +50,9 @@ const SignIn = () => {
     <p className='text-xs'>{error?.message || 
        errors?.message}</p>
   ) : null;
-
+  if (error) {
+    console.error("Sign in error:", error);
+  }
   if (loading ) {
     return <p>Loading...</p>;
   }

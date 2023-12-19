@@ -23,14 +23,112 @@ import Settings from "./Settings";
 
 const RightSideContent = () => {
   const [activeTab, setActiveTab] = useState("1");
-
+const [hrjob,sethrjobs]= useState("");
   const tabChange = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
-  return (
+
+  const retrievedUserData = localStorage.getItem("userData");
+  const parsedUserData = typeof retrievedUserData === 'string' ? JSON.parse(retrievedUserData) : retrievedUserData;
+
+const hrsemail = parsedUserData.email;
+
+  fetch(`http://localhost:4000/jobdetailsByEmail/${hrsemail}`)
+  .then(response => response.json())
+  .then(data => {
+    // Handle the received job details data
+    sethrjobs(data);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error('Error:', error);
+  });
+  const jobApplications = hrjob.applications;
+    return (
     <React.Fragment>
       <Col lg={8}>
-        <Card className="profile-content-page mt-4 mt-lg-0">
+
+        { parsedUserData.role =="hr" &&(
+          <Card className="profile-content-page mt-4 mt-lg-0">
+            
+          <Nav
+            className="profile-content-nav nav-pills border-bottom mb-4"
+            id="pills-tab"
+            role="tablist"
+          >
+            <NavItem role="presentation">
+              <NavLink
+                to="#"
+                className={classnames({ active: activeTab === "1" })}
+                onClick={() => {
+                  tabChange("1");
+                }}
+                type="button"
+              >
+                Overview
+              </NavLink>
+            </NavItem>
+            <NavItem role="presentation">
+              <NavLink
+                to="#"
+                className={classnames({ active: activeTab === "2" })}
+                onClick={() => {
+                  tabChange("2");
+                }}
+                type="button"
+              >
+                Settings
+              </NavLink>
+            </NavItem>
+          </Nav>
+
+          <CardBody className="p-4">
+            <TabContent activeTab={activeTab}>
+              <TabPane tabId="1">
+
+          
+           <h3> Your Jobs from Your Company:  </h3><h3></h3>
+
+            <div className="border rounded-md pt-5 ">       
+            <div class="card alert alert-success">
+              <div class="card-header">
+              {hrjob.companyName}
+              </div>
+              <div class="card-body">
+              {hrjob.applications && Array.isArray(hrjob.applications) ? (
+                    hrjob.applications.map((application, index) => (
+                      <div key={index}>
+                        <p>Application Name: {application.name}</p>
+                        <p>Application Email: {application.email}</p>
+                        <p>Application Message: {application.message}</p>
+                        {/* Other properties */}
+                      </div>
+                    ))
+                  ) : (
+                    <p>No applications found</p>
+                  )}
+              </div>
+            </div>
+
+
+
+
+                   
+              </div>
+
+
+              </TabPane>
+              <TabPane tabId="2">
+                <Settings></Settings>
+              </TabPane>
+            </TabContent>
+          </CardBody>
+        </Card>
+
+
+        )}  
+        { parsedUserData.role =="applicant" &&(
+          <Card className="profile-content-page mt-4 mt-lg-0">
           <Nav
             className="profile-content-nav nav-pills border-bottom mb-4"
             id="pills-tab"
@@ -228,6 +326,10 @@ const RightSideContent = () => {
             </TabContent>
           </CardBody>
         </Card>
+
+
+        )}  
+        
       </Col>
     </React.Fragment>
   );
