@@ -50,7 +50,7 @@ const CreateAJob = () => {
       jobRequirements: data.jobRequirements,
       educationBackground: data.educationBackground,
       companyName: data.companyName,
-      CompanyImg: data.CompanyImg,
+      companyImg: data.CompanyImg,
 }
 
         

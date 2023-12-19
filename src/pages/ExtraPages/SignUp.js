@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Card, Col, Row, CardBody } from "reactstrap";
 import lightLogo from "../../assets/images/Nextgenjob.png";
 import darkLogo from "../../assets/images/Nextgenjob.png";
 import signUpImage from "../../assets/images/auth/sign-up.png";
-import {useCreateUserWithEmailAndPassword, useSignInWithGoogle} from "react-firebase-hooks/auth";
+import {useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import { Toast } from "react-bootstrap";
@@ -13,14 +13,12 @@ const SignUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
   const {register,handleSubmit,formState: { errors },} = useForm();
   const navigate = useNavigate();
-
 const onSubmit = async data => {
 
     try {
       const userData= { email: data.email,  password : data.password, name: data.name, role : data.role };
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
-      console.log("sucess");
-
+      await createUserWithEmailAndPassword( userData.email, userData.password);
+      console.log(<p className=" alert alert-primary"> success</p>);
     if(user){
     navigate("/jobs");
     

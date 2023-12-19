@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Row, Input,Label} from "reactstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
@@ -11,8 +11,7 @@ const Settings = () => {
   const [userInfo, setUserInfo] = useState("null");
    const { email, userRole } = location.state || {};
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [selectedImage, setSelectedImage] = useState(null);
-     const apiKey = 'Y7abdd5b63ddc4d2cc4f3919d84a110cc'; 
+
 
 
   useEffect(() => {
@@ -24,15 +23,11 @@ const Settings = () => {
   }, []);
 
 
-
-
   const onSubmitHR = async (data, e) => {
-      e.preventDefault();
-      const {userRole, firstName, lastName, companyName, position, orgAddress, orgPhoneNumber, webAddress } = data;
-
+      const {userRole, firstName, lastName, companyName, position, orgAddress, orgPhoneNumber, webAddress } =data;
       try {
-        const response = await fetch(`http://localhost:4000/signin/${user.email}`, {
-          method: "POST",
+        const response = await fetch(`http://localhost:4000/signin/${email}`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -40,7 +35,7 @@ const Settings = () => {
             data,
           }),
         });
-  
+  console.lor(response);
         if (response.ok) {
         } else {
           console.error("Update failed");
@@ -50,13 +45,16 @@ const Settings = () => {
       }
     
     };
+
+
+
     const onSubmitApplicant = async (data, e) => {
       e.preventDefault();
       const {userRole, firstName, lastName, experience, educationBackground, skills, toolsExperience, address, phoneNumber, email } = data;
     
       try {
         const response = await fetch(`http://localhost:4000/signin/${user.email}`, {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -79,7 +77,7 @@ const Settings = () => {
 
   const onSubmit = async (data,e)=>{
     if (user && user[0]) {
-      const currentUser = user[0]; // Ensure user object exists
+      const currentUser = user[0]; 
       if (currentUser.role === 'hr') {
         await onSubmitHR(data, e);
       } else if (currentUser.role === 'applicant') {
@@ -195,11 +193,11 @@ const Settings = () => {
                               </div>
                            
                            
-                  <div className="mt-4 text-end">
-                    <input type="submit" onSubmit={()=>onSubmitHR} to="" className="btn btn-primary"/>
-                 
-                  </div>
-                           
+                        <div className="mt-4 text-end w-50">
+                          <input type="submit" onSubmit={()=>onSubmitHR} to="" className="btn btn-primary"/>
+                      
+                        </div>
+                                
                            </form>
                            
                            )}

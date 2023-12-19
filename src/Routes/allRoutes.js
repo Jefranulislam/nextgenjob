@@ -53,7 +53,7 @@ const userRoutes = [
   { path: "/jobdetails/:jobId", component: <JobDetails /> },
   { path: "/Jobs", component: <Jobs/> },
  
-  { path: "/createajob", component:   <RequireAuth>  <CreateAJob /> </RequireAuth>    },
+  { path: "/createajob", component:     <CreateAJob />    },
 
   //Company Section
   { path: "/privacyandpolicy", component: <PrivacyAndPolicy /> },

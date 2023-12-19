@@ -13,10 +13,8 @@ import classnames from "classnames";
 
 //Components Imports
 import FeaturedJobs from "../JobList/FeaturedJobs";
-import Freelancer from "../JobList/Freelancer.js";
-import Fulltime from "../JobList/Fulltime.js";
-import Parttime from "../JobList/Parttime.js";
 import RecentJobs from "./RecentJobs";
+import JobVacancy2 from "../../Jobs/JobGrid2/JobVacancy2.js";
 
 const JobList = () => {
   const [activeTab, setActiveTab] = useState("1");
@@ -27,6 +25,7 @@ const JobList = () => {
   return (
     <React.Fragment>
       <div className="section bg-light">
+       
         <Container>
           <Row className="justify-content-center">
             <Col lg={6}>
@@ -74,45 +73,7 @@ const JobList = () => {
                     Featured Jobs
                   </NavLink>
                 </NavItem>
-                <NavItem role="presentation">
-                  <NavLink
-                    className={classnames({ active: activeTab === "3" })}
-                    onClick={() => {
-                      tabChange("3");
-                    }}
-                    id="freelancer-tab"
-                    type="button"
-                    role="tab"
-                  >
-                    Freelancer
-                  </NavLink>
-                </NavItem>
-                <NavItem role="presentation">
-                  <NavLink
-                    className={classnames({ active: activeTab === "4" })}
-                    onClick={() => {
-                      tabChange("4");
-                    }}
-                    id="part-time-tab"
-                    type="button"
-                    role="tab"
-                  >
-                    Part Time
-                  </NavLink>
-                </NavItem>
-                <NavItem role="presentation">
-                  <NavLink
-                    className={classnames({ active: activeTab === "5" })}
-                    onClick={() => {
-                      tabChange("5");
-                    }}
-                    id="full-time-tab"
-                    type="button"
-                    role="tab"
-                  >
-                    Full Time
-                  </NavLink>
-                </NavItem>
+               
               </Nav>
             </Col>
           </Row>
@@ -128,17 +89,6 @@ const JobList = () => {
                   <FeaturedJobs />
                 </TabPane>
 
-                <TabPane tabId="3">
-                  <Freelancer />
-                </TabPane>
-
-                <TabPane tabId="4">
-                  <Parttime />
-                </TabPane>
-
-                <TabPane tabId="5">
-                  <Fulltime />
-                </TabPane>
               </TabContent>
             </Col>
           </Row>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Modal, ModalBody, Input, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -12,101 +12,24 @@ const RecentJobs = () => {
   //Apply Now Model
   const [modal, setModal] = useState(false);
   const openModal = () => setModal(!modal);
+  const [jobs, setjobs] = useState([]);
 
-  const recentJob = [
-    {
-      id: 1,
-      companyImg: jobImage1,
-      jobDescription: "Web Developer",
-      companyName: "Web Technology pvt.Ltd",
-      location: "Oakridge Lane ssRichardson",
-      salary: "1000-1200/m",
-      fullTime: true,
-      timing: "Full Time",
-      catogary: "Recent Jobs",
-      addclassNameBookmark: false,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ],
-      experience: "1 - 2 years",
-      Notes: "languages only differ in their grammar."
-    },
-    {
-      id: 2,
-      companyImg: jobImage2,
-      jobDescription: "Business Associate",
-      companyName: "Pixel Technology pvt.Ltd",
-      location: "Dodge City, Louisiana",
-      salary: "800-1800/m",
-      partTime: true,
-      timing: "Part Time",
-      catogary: "Recent Jobs",
-      addclassNameBookmark: true,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        },
-        {
-          id: 2,
-          badgeclassName: "bg-warning-subtle text-warning",
-          badgeName: "Urgent"
-        }
-      ],
-      experience: "0 - 1 years",
-      Notes: "languages only differ in their grammar."
-    },
-    {
-      id: 3,
-      companyImg: jobImage3,
-      jobDescription: "Digital Marketing Manager",
-      companyName: "NextGenJob Technology Pvt.Ltd",
-      location: "Phoenix, Arizona",
-      salary: "1500-2400/m",
-      freelancer: true,
-      timing: "Freelancer",
-      catogary: "Recent Jobs",
-      addclassNameBookmark: true,
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-info-subtle text-info",
-          badgeName: "Private"
-        }
-      ],
-      experience: "0 - 1 years",
-      Notes: null
-    },
-    {
-      id: 4,
-      companyImg: jobImage4,
-      jobDescription: "Product Director",
-      companyName: "Creative Agency",
-      location: "Escondido, California",
-      salary: "1500-2400/m",
-      fullTime: true,
-      timing: "Full Time",
-      catogary: "Recent Jobs",
-      badges: [
-        {
-          id: 1,
-          badgeclassName: "bg-warning-subtle text-warning",
-          badgeName: "Urgent"
-        }
-      ],
-      experience: "0 - 1 years",
-      Notes: null
-    }
-  ];
+  
+  useEffect(() => {
+    fetch('http://localhost:4000/jobs')
+        .then(res => res.json())
+        .then(data => {
+            setjobs(data);
+        })
+        .catch(error => {
+            console.error(error)
+        })
+}, []);
+
 
   return (
     <React.Fragment>
-      {recentJob.map((recentJobDetails, key) => (
+      {jobs.map((recentJobDetails, key) => (
         <div
           key={key}
           className={
@@ -128,7 +51,7 @@ const RecentJobs = () => {
                     <img
                       src={recentJobDetails.companyImg}
                       alt=""
-                      className="img-fluid rounded-3"
+                      className="img-fluid rounded-3 w-50"
                     />
                   </Link>
                 </div>

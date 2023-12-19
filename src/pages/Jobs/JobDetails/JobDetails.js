@@ -29,34 +29,7 @@ const [user]= useAuthState(auth);
     setApplicationData({ ...applicationData, [name]: value });
   };
 
-  // const handleSubmitApplication = (jobId) => {
-  //   // Make a PUT request to update the specific job's applications array
-  //   fetch(`http://localhost:4000/jobs/${jobId}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       applicationData
-  //     })
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // Handle the response as needed (e.g., show success message, update state)
-  //       console.log("Application submitted successfully", data);
-  //       // Optionally, close the modal or reset the input fields
-  //       setModal(false);
-  //       setApplicationData({
-  //         name: "",
-  //         email: "",
-  //         message: ""
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error submitting application", error);
-  //     });
-  // };
-
+ 
   
   
   const handleSubmitApplication = (jobId) => {
@@ -89,16 +62,6 @@ const [user]= useAuthState(auth);
       });
   };
   
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -150,6 +113,9 @@ const [user]= useAuthState(auth);
             <Row>
               <Col md={8}>
                 <h5 className="mb-1">{jobs.jobDescription}</h5>
+                <p>"We're looking for a dynamic and motivated individual to join our team. The ideal candidate should possess a strong passion for this  industry field, exceptional {jobs.positionSkills}, and a proven track record of{jobs.experience}. They should thrive in a fast-paced environment, exhibit excellent problem-solving abilities, and demonstrate a high level of specific soft skills like communication, teamwork, or leadership."
+
+</p>
                 <ul className="list-inline text-muted mb-0">
                   <li className="list-inline-item">
                     <i className="mdi mdi-account"></i> 8 Vacancy
@@ -228,6 +194,10 @@ const [user]= useAuthState(auth);
             <div className="job-detail-desc mt-2">
              
               <ul className="job-detail-list list-unstyled mb-0 text-muted">
+                <p>"The successful candidate will be responsible for {jobs.jobRequirements}. This includes specific duties or projects, collaborating closely with relevant teams or stakeholders, and contributing proactively to company objectives or goals. The role involves specific actions or outcomes, and the ideal candidate should be prepared to take on additional responsibilities or adapt to evolving needs."
+
+
+</p>
                 <li>
                   <i className="uil uil-circle"></i>  {jobs.positionResponsibilities}
                 </li>
@@ -246,7 +216,9 @@ const [user]= useAuthState(auth);
             <h5 className="mb-3">Qualification </h5>
             <div className="job-detail-desc mt-2">
               <ul className="job-detail-list list-unstyled mb-0 text-muted">
+<p>  "We require a equivalent practical experience. Candidates should have a solid understanding of {jobs.positionSkills}, coupled with a demonstrated ability to  {jobs.positionResponsibilities} . Strong interpersonal skills and the ability to handle specific challenges or situations are highly valued in this role."
 
+</p>
               <li>
                   <i className="uil uil-circle"></i>  {jobs.additionalQualifications}
                 </li>

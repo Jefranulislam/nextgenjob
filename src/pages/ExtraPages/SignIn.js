@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, CardBody, Col, Container, Row} from "reactstrap";
+import React, { useContext, useState } from "react";
+import { Alert, Card, CardBody, Col, Container, Row} from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
@@ -9,29 +9,33 @@ import darkLogo from "../../assets/images/Nextgenjob.png";
 import signInImage from "../../assets/images/auth/sign-in.png";
 
 const SignIn = () => {
-  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+    const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();  
-  
-  
+
+
   const onSubmit = async (data) => {
     try { 
       const userData = {email: data.email , password: data.password  , userRole: data.userRole };
+        await signInWithEmailAndPassword( userData.email,userData.password); 
       console.log(userData);
-        await signInWithEmailAndPassword( data.email,data.password); 
-        const response = await fetch("http://localhost:4000/signin/", {
-          method: "POST",
+      localStorage.setItem("userData", JSON.stringify(userData));
+      const response = await fetch('/signin', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userData }),
+          body: JSON.stringify(userData),
         });
         console.log(response);
         console.log(userData);
-        localStorage.setItem("userData", JSON.stringify(userData));
 
     } catch (error) {
-      alert("SignIn Error:", error);
         console.log(error);
         console.error(error);
     }
